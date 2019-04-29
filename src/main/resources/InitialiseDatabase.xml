@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	* InitialiseDatabase.xml 
+	* 
+	* Copyright (C) 2019 Universidad de Sevilla 
+	* 
+	* The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from http://www.tdg-seville.info/License.html 
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMINISTRATOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- CreditCards -->
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Paolo Luna Rodríguez" />
+		<property name="brandName" value="Visa" />
+		<property name="number" value="4278959519763522" />
+		<property name="expirationMonth" value="02" />
+		<property name="expirationYear" value="22" />
+		<property name="cvv" value="194" />
+	</bean>
+	
+	<!-- Actors -->
+
+	<!-- Administrators -->
+
+	<bean id="actor1" class="domain.Administrator">
+		<property name="name" value="Paolo" />
+		<property name="surnames" value="Luna Rodríguez" />
+		<property name="VAT" value="ES666666666" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="photo"
+			value="https://img.lovepik.com/element/40025/1507.png_860.png" />
+		<property name="email" value="admin@gmail.com" />
+		<property name="phone" value="698765432" />
+		<property name="address" value="" />
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	<!-- Configuration parameters -->
+
+	<bean id="configurationParameters" class="domain.ConfigurationParameters">
+		<property name="name" value="Acme Rookies" />
+		<property name="banner" value="https://i.imgur.com/7b8lu4b.png" />
+		<property name="sysMessage"
+			value="Welcome to Acme Rookies! We're IT rookie's favourite job marketplace!" />
+		<property name="sysMessageEs"
+			value="¡Bienvenidos a Acme Rookies! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
+		<property name="countryCode" value="+34" />
+		<property name="finderCachedHours" value="1" />
+		<property name="finderMaxResults" value="10" />
+	</bean>
+	
+	<!-- Spamwords -->
+	
+	<bean id="spamWord1" class="domain.SpamWord">
+		<property name="word" value="sex" />
+	</bean>
+	<bean id="spamWord2" class="domain.SpamWord">
+		<property name="word" value="viagra" />
+	</bean>
+	<bean id="spamWord3" class="domain.SpamWord">
+		<property name="word" value="cialis" />
+	</bean>
+	<bean id="spamWord4" class="domain.SpamWord">
+		<property name="word" value="one million" />
+	</bean>
+	<bean id="spamWord5" class="domain.SpamWord">
+		<property name="word" value="you've been selected" />
+	</bean>
+	<bean id="spamWord6" class="domain.SpamWord">
+		<property name="word" value="Nigeria" />
+	</bean>
+	<bean id="spamWord7" class="domain.SpamWord">
+		<property name="word" value="sexo" />
+	</bean>
+	<bean id="spamWord8" class="domain.SpamWord">
+		<property name="word" value="un millon" />
+	</bean>
+	<bean id="spamWord9" class="domain.SpamWord">
+		<property name="word" value="has sido elegido" />
+	</bean>
+
+</beans>
