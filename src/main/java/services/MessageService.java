@@ -17,10 +17,11 @@ import org.springframework.validation.Validator;
 import repositories.MessageRepository;
 import domain.Actor;
 import domain.Administrator;
+import domain.ConfigurationParameters;
 import domain.Finder;
-import domain.Rookie;
 import domain.Message;
 import domain.Position;
+import domain.Rookie;
 import domain.SpamWord;
 
 @Service
@@ -29,28 +30,30 @@ public class MessageService {
 
 	//Managed repository -------------------
 	@Autowired
-	private MessageRepository		messageRepository;
+	private MessageRepository				messageRepository;
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private AdministratorService			administratorService;
 
 	@Autowired
-	private ActorService			actorService;
+	private ActorService					actorService;
 
 	@Autowired
-	private SpamWordService			spamWordService;
+	private SpamWordService					spamWordService;
 
 	@Autowired
-	private RookieService			rookieService;
+	private RookieService					rookieService;
 
 	@Autowired
-	private FinderService			finderService;
+	private FinderService					finderService;
 
 	@Autowired
-	private PositionService			positionService;
+	private PositionService					positionService;
 
 	@Autowired
-	private Validator				validator;
+	private Validator						validator;
+	@Autowired
+	private ConfigurationParametersService	configurationParametersService;
 
 
 	//Supporting Services ------------------
@@ -198,6 +201,26 @@ public class MessageService {
 		return msg;
 	}
 
+	public Message notifyWelcome() {
+		final ConfigurationParameters a = this.configurationParametersService.find();
+		Assert.isTrue(a.getWelcomeNotify() == false);
+		final Message msn = new Message();
+		msn.setBody("This message is to notify that our web has been rebranded to Acme Rookies");
+		msn.setCopy(false);
+		msn.setDeleted(false);
+		msn.setMoment(new Date());
+		msn.setOwner(this.administratorService.findByPrincipal());
+		msn.setRecipient(this.administratorService.findByPrincipal());
+		msn.setSender(this.administratorService.findByPrincipal());
+		msn.setSubject("NOTIFICATION");
+		final Collection<String> tags = new ArrayList<>();
+		tags.add("SYSTEM");
+		msn.setTags(tags);
+		this.isSpam(msn);
+		a.setWelcomeNotify(true);
+		this.configurationParametersService.save(a);
+		return msn;
+	}
 	public List<String> spamwords(final Collection<SpamWord> sw) {
 
 		Collection<SpamWord> spamwords = new ArrayList<>();

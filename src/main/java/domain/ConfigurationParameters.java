@@ -23,6 +23,7 @@ public class ConfigurationParameters extends DomainEntity {
 	private String	countryCode;
 	private int		finderCachedHours;
 	private int		finderMaxResults;
+	private Boolean	welcomeNotify;
 
 
 	@NotBlank
@@ -92,5 +93,13 @@ public class ConfigurationParameters extends DomainEntity {
 
 	public void setFinderMaxResults(final int finderMaxResults) {
 		this.finderMaxResults = finderMaxResults;
+	}
+
+	public Boolean getWelcomeNotify() {
+		return this.welcomeNotify;
+	}
+
+	public void setWelcomeNotify(final Boolean welcomeNotify) {
+		this.welcomeNotify = welcomeNotify;
 	}
 }

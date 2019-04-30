@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.ConfigurationParametersService;
 import services.MessageService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -25,10 +26,12 @@ import domain.Message;
 public class MessageController extends AbstractController {
 
 	@Autowired
-	private MessageService	messageService;
+	private MessageService					messageService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService					actorService;
+	@Autowired
+	private ConfigurationParametersService	configurationParametersService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -40,7 +43,9 @@ public class MessageController extends AbstractController {
 			final Collection<Message> messagesSend = this.messageService.findSend(id);
 			final Collection<Message> messagesSpam = this.messageService.findSpam(id);
 			final Collection<Message> messagesDeleted = this.messageService.findDeleted(id);
+			final Boolean notification = this.configurationParametersService.find().getWelcomeNotify();
 			result = new ModelAndView("message/list");
+			result.addObject("notification", notification);
 			result.addObject("messagesRecived", messagesRecived);
 			result.addObject("messagesSend", messagesSend);
 			result.addObject("messagesSpam", messagesSpam);
@@ -51,7 +56,6 @@ public class MessageController extends AbstractController {
 		}
 		return result;
 	}
-
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int messageId) {
 		ModelAndView result;

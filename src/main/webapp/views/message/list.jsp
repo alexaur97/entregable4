@@ -28,6 +28,10 @@
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<td><acme:cancel url="/message/administrator/create.do"
 			code="message.admin.create" /></td>
+			<jstl:if test="${notification==false}">
+			<acme:cancel url="/message/administrator/notify.do"
+			code="message.admin.notification" />
+		</jstl:if>
 </security:authorize>
 
 <h4>

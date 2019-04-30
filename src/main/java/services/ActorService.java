@@ -150,4 +150,5 @@ public class ActorService {
 	public Actor findByUserName(final String name) {
 		return this.actorRepository.findByUserName(name);
 	}
+
 }
