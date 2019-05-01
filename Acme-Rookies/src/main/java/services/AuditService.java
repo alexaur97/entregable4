@@ -92,5 +92,17 @@ public class AuditService {
 		this.validator.validate(res, binding);
 		return res;
 	}
+
+
 	//Other Methods--------------------
+
+	public Collection<Object> statsAuditScorePerPosition() {
+		final Collection<Object> result = this.auditRepository.statsAuditScorePerPosition();
+		return result;
+	}
+
+	public Collection<Object> statsAuditScorePerCompany() {
+		final Collection<Object> result = this.auditRepository.statsAuditScorePerCompany();
+		return result;
+	}
 }

@@ -343,4 +343,9 @@ public class PositionService {
 
 	}
 
+	public Double avgSalaryHighestPositions() {
+		final Double result = this.positionRepository.avgSalaryHighestPositions();
+		return result;
+	}
+
 }

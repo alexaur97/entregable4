@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.AuditService;
 import services.CompanyService;
 import services.FinderService;
-import services.RookieService;
 import services.PositionService;
+import services.RookieService;
 import controllers.AbstractController;
 import domain.Company;
-import domain.Rookie;
 import domain.Position;
+import domain.Rookie;
 
 @Controller
 @RequestMapping("/stats/administrator")
@@ -38,6 +39,9 @@ public class StatsAdministratorController extends AbstractController {
 	@Autowired
 	private FinderService		finderService;
 
+	@Autowired
+	private AuditService		auditService;
+
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
@@ -55,7 +59,15 @@ public class StatsAdministratorController extends AbstractController {
 			final Collection<Double> curriculaPerRookie = this.rookieService.statsCurriculaPerRookie();
 			final Collection<Double> statsResultsFinders = this.finderService.statsResultsFinders();
 			final Collection<Double> emptyVsNonEmptyFindersRatio = this.finderService.emptyVsNonEmptyFindersRatio();
+			final Collection<Object> statsAuditScorePerPosition = this.auditService.statsAuditScorePerPosition();
+			final Collection<Object> statsAuditScorePerCompany = this.auditService.statsAuditScorePerCompany();
+			final Collection<Company> companiesWithHighestAuditScore = this.companyService.companiesWithHighestAuditScore();
+			final Double avgSalaryHighestPositions = this.positionService.avgSalaryHighestPositions();
 
+			result.addObject("avgSalaryHighestPositions", avgSalaryHighestPositions);
+			result.addObject("companiesWithHighestAuditScore", companiesWithHighestAuditScore);
+			result.addObject("statsAuditScorePerCompany", statsAuditScorePerCompany);
+			result.addObject("statsAuditScorePerPosition", statsAuditScorePerPosition);
 			result.addObject("statsResultsFinders", statsResultsFinders);
 			result.addObject("emptyVsNonEmptyFindersRatio", emptyVsNonEmptyFindersRatio);
 			result.addObject("curriculaPerRookie", curriculaPerRookie);

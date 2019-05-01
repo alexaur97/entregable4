@@ -182,5 +182,9 @@ public class CompanyService {
 			scores.add(a);
 		}
 		return scores;
+
+	public Collection<Company> companiesWithHighestAuditScore() {
+		final Collection<Company> result = this.companyRepository.companiesWithHighestAuditScore();
+		return result;
 	}
 }
