@@ -99,6 +99,9 @@ public class PositionController {
 		try {
 			Assert.notNull(positionId);
 			final Sponsorship sponsorship = this.sponsorshipService.randomSponshorship(positionId);
+			Boolean c = true;
+			if (sponsorship == null)
+				c = false;
 			position = this.positionService.findOne(positionId);
 
 			Assert.isTrue(position.getMode().equals("FINAL"));
@@ -112,6 +115,7 @@ public class PositionController {
 			result = new ModelAndView("position/show");
 			result.addObject("position", position);
 			result.addObject("b", b);
+			result.addObject("c", c);
 			result.addObject("sponsorship", sponsorship);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/#");
