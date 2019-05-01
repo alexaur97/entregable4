@@ -39,6 +39,10 @@
 			<li><a href="finder/rookie/view.do"><spring:message code="master.page.finder" /></a></li>
 		</security:authorize>
 
+		<security:authorize access="hasRole('AUDITOR')">
+			<li><a href="audit/auditor/myList.do"><spring:message code="master.page.audits" /></a></li>
+		</security:authorize>
+		
 		<security:authorize access="hasRole('COMPANY')">
 			<li><a class="fNiv" href="position/company/myList.do"><spring:message
 						code="master.page.myPositions" /></a></li>

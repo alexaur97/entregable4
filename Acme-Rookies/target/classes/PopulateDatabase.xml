@@ -877,7 +877,7 @@
 		<property name="finderCachedHours" value="1" />
 		<property name="finderMaxResults" value="10" />
 		<property name="welcomeNotify" value="False" />
-		
+		<property name="VATtax" value="21" />		
 	</bean>
 	
 	<!-- SocialProfiles -->
@@ -1434,6 +1434,7 @@
 		<property name="text" value="So so" />
 		<property name="moment" value="03/12/2018 18:11" />
 		<property name="score" value="5" />
+		<property name="mode" value="DRAFT" />
 		<property name="auditor" ref="actor9" />
 		<property name="position" ref="position1" />
 	</bean>	
@@ -1442,6 +1443,7 @@
 		<property name="text" value="Really good" />
 		<property name="moment" value="07/07/2017 11:11" />
 		<property name="score" value="9" />
+		<property name="mode" value="FINAL" />
 		<property name="auditor" ref="actor9" />
 		<property name="position" ref="position1" />
 	</bean>	

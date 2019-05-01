@@ -1,38 +1,44 @@
-package services; 
 
-import java.util.Collection; 
+package services;
 
-import org.springframework.beans.factory.annotation.Autowired; 
-import org.springframework.stereotype.Service; 
-import org.springframework.transaction.annotation.Transactional; 
-import org.springframework.util.Assert; 
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AuditRepository;
+import domain.Audit;
+import domain.Auditor;
 
-import domain.Audit; 
-import domain.Item;
-
-@Service 
-@Transactional 
-public class AuditService { 
+@Service
+@Transactional
+public class AuditService {
 
 	//Managed repository -------------------
 	@Autowired
-	private AuditRepository auditRepository;
+	private AuditRepository	auditRepository;
+
+	@Autowired
+	private AuditorService	auditorService;
+
+	@Autowired
+	private Validator		validator;
 
 
 	//Supporting Services ------------------
 
-
 	//COnstructors -------------------------
-	public AuditService(){
+	public AuditService() {
 		super();
 	}
 
-
 	//Simple CRUD methods--------------------
 
-	public Audit create(){
+	public Audit create() {
 		Audit result;
 
 		result = new Audit();
@@ -40,32 +46,49 @@ public class AuditService {
 		return result;
 	}
 
-	public Collection<Audit> findAll(){
+	public Collection<Audit> findAll() {
 		Collection<Audit> result;
 
-		result = auditRepository.findAll();
+		result = this.auditRepository.findAll();
 
 		return result;
 	}
 
-	public Audit findOne(int auditId){
+	public Audit findOne(final int auditId) {
 		Audit result;
 
-		result = auditRepository.findOne(auditId);
+		result = this.auditRepository.findOne(auditId);
 
 		return result;
 	}
 
-	public void save(Audit audit){
+	public void save(final Audit audit) {
 		Assert.notNull(audit);
-
-		auditRepository.save(audit);
+		final Audit auditDB = this.findOne(audit.getId());
+		Assert.isTrue(auditDB.getMode().equals("DRAFT"));
+		this.auditRepository.save(audit);
 	}
 
-	public void delete(Audit audit){
-		auditRepository.delete(audit);
+	public void delete(final Audit audit) {
+		Assert.notNull(audit);
+		final Audit auditDB = this.findOne(audit.getId());
+		Assert.isTrue(auditDB.getMode().equals("DRAFT"));
+		this.auditRepository.delete(audit);
 	}
 
+	public Collection<Audit> findByPrincipal() {
+		final Auditor auditor = this.auditorService.findByPrincipal();
+		final Collection<Audit> res = this.auditRepository.findByPrincipal(auditor.getId());
+		return res;
+	}
 
+	public Audit reconstruct(final Audit audit, final BindingResult binding) {
+		final Audit res = audit;
+		final Auditor auditor = this.auditorService.findByPrincipal();
+		res.setAuditor(auditor);
+
+		this.validator.validate(res, binding);
+		return res;
+	}
 	//Other Methods--------------------
-} 
+}

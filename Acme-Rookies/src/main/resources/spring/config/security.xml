@@ -43,8 +43,10 @@
 		
 		
 		<security:intercept-url pattern="/auditor/auditor/editPosition.do" access="hasRole('AUDITOR')" />
-		
-		
+		<security:intercept-url pattern="/audit/auditor/myList.do" access="hasRole('AUDITOR')" />
+		<security:intercept-url pattern="/audit/auditor/edit.do" access="hasRole('AUDITOR')" />
+	
+	
 		<security:intercept-url pattern="/position/company/myList.do" access="hasRole('COMPANY')" />
 		<security:intercept-url pattern="/position/company/create.do" access="hasRole('COMPANY')" />
 		<security:intercept-url pattern="/position/company/edit.do" access="hasRole('COMPANY')" />
