@@ -44,6 +44,7 @@
 		
 			
 			
+		<value>/views/audit/messages</value>
 			
 			<value>/views/sponsorship/messages</value>
 			<value>/views/auditor/messages</value>
