@@ -72,6 +72,7 @@
 
 					<li class="arrow"></li>
 					<security:authorize access="hasRole('ADMINISTRATOR')">
+						<li><a href="configurationParameters/administrator/edit.do"><spring:message code="master.page.administrator.config" /></a></li>
 						<li><a href="administrator/administrator/create.do"><spring:message
 									code="master.page.signup.admin" /></a></li>
 						<li><a href="auditor/administrator/create.do"><spring:message
