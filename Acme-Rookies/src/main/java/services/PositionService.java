@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.PositionRepository;
+import domain.Auditor;
 import domain.Company;
 import domain.Position;
 
@@ -36,6 +37,9 @@ public class PositionService {
 
 	@Autowired
 	private MessageService					messageService;
+
+	@Autowired
+	private AuditorService					auditorService;
 
 	@Autowired
 	private Validator						validator;
@@ -341,6 +345,18 @@ public class PositionService {
 			result = positionsByKeyWord;
 		return result;
 
+	}
+
+	public Collection<Position> findPositionsRequisitos() {
+		final Collection<Position> pos = this.positionRepository.findPositionsReq();
+		final Auditor auditor = this.auditorService.findByPrincipal();
+		final Collection<Position> list = auditor.getPositions();
+		final Collection<Position> res = new ArrayList<>();
+		for (final Position p : pos)
+			if (!list.contains(p))
+				res.add(p);
+
+		return res;
 	}
 
 }

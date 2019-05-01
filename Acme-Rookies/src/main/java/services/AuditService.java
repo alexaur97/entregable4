@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,6 +89,8 @@ public class AuditService {
 		final Audit res = audit;
 		final Auditor auditor = this.auditorService.findByPrincipal();
 		res.setAuditor(auditor);
+		final Date date = new Date();
+		res.setMoment(date);
 
 		this.validator.validate(res, binding);
 		return res;

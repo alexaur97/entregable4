@@ -34,7 +34,6 @@
 						<form:hidden path="version"/>
 								
 						<acme:textarea code="audit.text" path="text" />
-						<acme:textbox placeholder="yyyy-MM-dd" code="audit.moment" path="moment" />
 						<acme:textbox  code="audit.score" path="score" />
 						<spring:message code="audit.mode"/>
 						<form:select path="mode">
@@ -54,7 +53,7 @@
 						
 						
 						<acme:submit name="save" code="audit.save" />
-						<jstl:if test="${position.id!=0}">
+						<jstl:if test="${audit.id!=0}">
 							<acme:submitConfirmation name="delete" code="audit.delete"
 								onclick="audit.delete.confirmation" />
 						</jstl:if>

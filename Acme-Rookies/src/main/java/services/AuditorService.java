@@ -1,21 +1,6 @@
 
 package services;
 
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-
-import repositories.AuditorRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
-import domain.Auditor;
-import domain.Position;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -26,9 +11,12 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AuditorRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Auditor;
 import domain.CreditCard;
@@ -48,6 +36,7 @@ public class AuditorService {
 
 	@Autowired
 	private Validator			validator;
+
 
 	//Supporting Services ------------------
 
@@ -136,6 +125,9 @@ public class AuditorService {
 		final Auditor res = auditor;
 		final Auditor a = this.findOne(auditor.getId());
 
+		final Collection<Position> positions = a.getPositions();
+
+		res.getPositions().addAll(positions);
 		res.setAddress(a.getAddress());
 		res.setBanned(a.getBanned());
 		res.setCreditCard(a.getCreditCard());
