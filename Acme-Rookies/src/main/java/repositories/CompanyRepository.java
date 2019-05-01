@@ -20,6 +20,7 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
 	@Query("select c from Company c where c.banned=false")
 	Collection<Company> companiesNotBanned();
+
 	@Query("select avg(0.1*(a.score)) from Audit a where a.position.company.id=?1 and a.mode='FINAL'")
 	Double score(int id);
 }

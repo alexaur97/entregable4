@@ -1,21 +1,6 @@
 
 package services;
 
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-
-import repositories.AuditorRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
-import domain.Auditor;
-import domain.Position;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -26,9 +11,12 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AuditorRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Auditor;
 import domain.CreditCard;
@@ -41,13 +29,17 @@ public class AuditorService {
 
 	//Managed repository -------------------
 	@Autowired
-	private AuditorRepository	auditorRepository;
+	private AuditorRepository		auditorRepository;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private Validator			validator;
+	private AdministratorService	administratorService;
+
+	@Autowired
+	private Validator				validator;
+
 
 	//Supporting Services ------------------
 
@@ -61,6 +53,7 @@ public class AuditorService {
 	//Simple CRUD methods--------------------
 
 	public Auditor create() {
+		this.administratorService.findByPrincipal();
 		Auditor result;
 		result = new Auditor();
 		result.setBanned(false);
@@ -83,7 +76,6 @@ public class AuditorService {
 
 		return result;
 	}
-
 	public Collection<Auditor> findAll() {
 		Collection<Auditor> result;
 
