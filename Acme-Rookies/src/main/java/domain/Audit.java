@@ -12,6 +12,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -25,6 +27,7 @@ public class Audit extends DomainEntity {
 	private String				text;
 	private Date				moment;
 	private Integer				score;
+	private String				mode;
 
 	private Auditor				auditor;
 	private Position			position;
@@ -41,6 +44,7 @@ public class Audit extends DomainEntity {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past
 	public Date getMoment() {
 		return moment;
 	}
@@ -57,6 +61,17 @@ public class Audit extends DomainEntity {
 
 	public void setScore(Integer score) {
 		this.score = score;
+	}
+	
+	@NotBlank
+	@Pattern(regexp = "^DRAFT|FINAL$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 	@NotNull
