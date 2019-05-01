@@ -43,6 +43,11 @@
 			<value>/views/positionData/messages</value>
 			<value>/views/educationData/messages</value>
 			<value>/views/miscellaneousData/messages</value>
+		
+		<value>/views/provider/messages</value>
+		<value>/views/item/messages</value>
+		
+			
 			
 			
 	</util:list>

@@ -56,10 +56,21 @@
 
 		<li><a class="fNiv" href="company/list.do"><spring:message
 					code="master.page.companies" /></a></li>
+		
+		<li><a class="fNiv" href="provider/list.do"><spring:message
+					code="master.page.providers" /></a></li>
+		
+		<li><a class="fNiv" href="item/list.do"><spring:message
+					code="master.page.items" /></a></li>
 
 		<security:authorize access="hasRole('COMPANY')">
 			<li><a class="fNiv" href="problem/company/list.do"><spring:message
 						code="master.page.company.list" /></a></li>
+		</security:authorize>
+		
+			<security:authorize access="hasRole('PROVIDER')">
+			<li><a class="fNiv" href="item/provider/list.do"><spring:message
+						code="master.page.item.list" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">

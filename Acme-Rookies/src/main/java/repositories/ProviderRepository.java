@@ -1,15 +1,16 @@
+
 package repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository; 
-import org.springframework.data.jpa.repository.Query; 
-import org.springframework.stereotype.Repository; 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import domain.Provider; 
+import domain.Provider;
 
-@Repository 
-public interface ProviderRepository extends JpaRepository<Provider, Integer>{ 
+@Repository
+public interface ProviderRepository extends JpaRepository<Provider, Integer> {
 
-	//@Query("") 
-	//Method 
+	@Query("select p from Provider p where p.userAccount.id=?1")
+	Provider findByUserId(int id);
 
-} 
+}

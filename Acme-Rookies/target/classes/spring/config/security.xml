@@ -94,6 +94,11 @@
 		
 		<security:intercept-url pattern="/actor/editAdm.do"
 			access="hasRole('ADMINISTRATOR')"  />
+			
+		<security:intercept-url pattern="/item/provider/list.do"
+			access="hasRole('PROVIDER')"  />
+		<security:intercept-url pattern="/item/provider/create.do"
+			access="hasRole('PROVIDER')"  />
 
 
 		<security:intercept-url pattern="/socialprofile/list.do"
@@ -106,8 +111,11 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/socialprofile/create.do"
 			access="isAuthenticated()" />
+			
+		<security:intercept-url pattern="/provider/list.do"
+			access="permitAll" />
 
-<security:intercept-url pattern="/position/list.do"
+		<security:intercept-url pattern="/position/list.do"
 			access="permitAll" />
 		<security:intercept-url pattern="/company/show.do"
 			access="permitAll" />
@@ -119,6 +127,13 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/position/show.do"
 			access="permitAll" />
+			
+		<security:intercept-url pattern="/item/listByProvider.do"
+			access="permitAll" />
+			
+		<security:intercept-url pattern="/item/list.do"
+			access="permitAll" />
+			
 		<security:intercept-url pattern="/company/signup.do"
 			access="isAnonymous()" />
 		<security:intercept-url pattern="/rookie/signup.do"
