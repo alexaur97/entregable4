@@ -19,6 +19,11 @@
 		<put-attribute name="body" value="/views/item/edit.jsp" />
 	</definition>
 	
+	<definition name="item/show" extends="master.page">
+		<put-attribute name="title" value="Mostrar item" />
+		<put-attribute name="body" value="/views/item/show.jsp" />
+	</definition>
+	
 	
 	
 </tiles-definitions>

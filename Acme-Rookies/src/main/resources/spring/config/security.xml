@@ -110,6 +110,9 @@
 			access="hasRole('PROVIDER')"  />
 		<security:intercept-url pattern="/item/provider/create.do"
 			access="hasRole('PROVIDER')"  />
+		<security:intercept-url pattern="/item/provider/show.do"
+			access="hasRole('PROVIDER')"  />
+
 
 
 		<security:intercept-url pattern="/socialprofile/list.do"

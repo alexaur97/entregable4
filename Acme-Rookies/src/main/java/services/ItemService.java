@@ -69,6 +69,8 @@ public class ItemService {
 	}
 
 	public void delete(final Item item) {
+		final Provider p = this.providerService.findByPrincipal();
+		Assert.isTrue(item.getProvider().equals(p));
 		this.itemRepository.delete(item);
 	}
 
