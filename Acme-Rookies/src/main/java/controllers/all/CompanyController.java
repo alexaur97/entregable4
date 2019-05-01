@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import security.LoginService;
 import services.ActorService;
+import services.AuditService;
 import services.CompanyService;
 import services.PositionService;
 import domain.Company;
@@ -39,6 +40,9 @@ public class CompanyController {
 
 	@Autowired
 	private ActorService	actorService;
+
+	@Autowired
+	private AuditService	auditService;
 
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
