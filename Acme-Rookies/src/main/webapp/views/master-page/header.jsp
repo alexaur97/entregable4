@@ -87,6 +87,8 @@
 					
 					<li><a href="actor/administrator/list.do"><spring:message
 								code="master.page.actorList" /></a></li>
+								<li><a href="company/administrator/list.do"><spring:message
+								code="master.page.companyListScore" /></a></li>
 		            </security:authorize>
 
 					<security:authorize access="hasRole('ROOKIE')">

@@ -1,15 +1,15 @@
+
 package repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository; 
-import org.springframework.data.jpa.repository.Query; 
-import org.springframework.stereotype.Repository; 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import domain.Audit; 
+import domain.Audit;
 
-@Repository 
-public interface AuditRepository extends JpaRepository<Audit, Integer>{ 
+@Repository
+public interface AuditRepository extends JpaRepository<Audit, Integer> {
 
 	//@Query("") 
 	//Method 
 
-} 
+}
