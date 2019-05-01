@@ -64,8 +64,10 @@ public class AuditService {
 
 	public void save(final Audit audit) {
 		Assert.notNull(audit);
-		final Audit auditDB = this.findOne(audit.getId());
-		Assert.isTrue(auditDB.getMode().equals("DRAFT"));
+		if (audit.getId() != 0) {
+			final Audit auditDB = this.findOne(audit.getId());
+			Assert.isTrue(auditDB.getMode().equals("DRAFT"));
+		}
 		this.auditRepository.save(audit);
 	}
 

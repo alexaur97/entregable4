@@ -127,6 +127,24 @@ public class AuditAuditorController {
 
 		return result;
 	}
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int auditId) {
+		ModelAndView res;
+		try {
+
+			final Audit audit = this.auditService.findOne(auditId);
+			Assert.notNull(audit);
+
+			final Collection<Audit> audits = this.auditService.findByPrincipal();
+			Assert.isTrue(audits.contains(audit));
+			res = new ModelAndView("audit/show");
+			res.addObject("audit", audit);
+
+		} catch (final Throwable oops) {
+			res = new ModelAndView("redirect:/#");
+		}
+		return res;
+	}
 
 	protected ModelAndView createEditModelAndView(final Audit audit) {
 		return this.createEditModelAndView(audit, null);

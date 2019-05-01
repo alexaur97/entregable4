@@ -38,6 +38,12 @@
 		</jstl:if>
 	</display:column>
 	
+		<display:column titleKey="audit.show">
+	
+		<acme:cancel url="/audit/auditor/show.do?auditId=${audit.id}"
+			code="audit.show" />
+		
+	</display:column>
 	
 	
 </display:table>
