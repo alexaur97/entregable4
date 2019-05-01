@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,7 @@ public class ProviderService {
 	private ActorService		actorService;
 
 
-
 	//Supporting Services ------------------
-
 
 	//COnstructors -------------------------
 	public ProviderService() {
@@ -85,7 +84,18 @@ public class ProviderService {
 		final Provider p = this.providerRepository.findByUserId(id);
 		return p;
 	}
-	
 
 	//Other Methods--------------------
+
+	public Collection<Provider> top5ProvidersPerItems() {
+		final Collection<Provider> providers = this.providerRepository.top5ProvidersPerItems();
+		final ArrayList<Provider> result = new ArrayList<>();
+		int index = 0;
+		for (final Provider p : providers)
+			if (index < 5) {
+				result.add(p);
+				index++;
+			}
+		return result;
+	}
 }

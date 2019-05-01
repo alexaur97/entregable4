@@ -22,6 +22,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <h3>
 <spring:message code="stats.position.company" /> :
@@ -231,6 +232,34 @@
 <jstl:out value="${avgSalaryHighestPositions}" />
 </h3>
 
+<h3>
+<spring:message code="stats.item.provider" /> :
+</h3>
+<spring:message code="stats.item.provider.average" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][0]}" />
+<br />
+<spring:message code="stats.item.provider.min" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][1]}" />
+<br />
+<spring:message code="stats.item.provider.max" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][2]}" />
+<br />
+<spring:message code="stats.item.provider.stddev" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][3]}" />
+<br />
 
-
+<br />
+<h3>
+<spring:message code="stats.top5ProvidersPerItems" /> :
+</h3>
+<ul>
+	<jstl:forEach items="${top5ProvidersPerItems}" var="x">
+		<li><jstl:out value="${x.name} ${x.surnames} : ${fn:length(x.items)}" /></li>
+	</jstl:forEach>
+</ul>
+<br />
 

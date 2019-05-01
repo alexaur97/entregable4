@@ -97,4 +97,9 @@ public class ItemService {
 	}
 	//Other Methods--------------------
 
+	public Collection<Double> statsNumberItemsPerProvider() {
+		final Collection<Double> result = this.itemRepository.statsNumberItemsPerProvider();
+		return result;
+	}
+
 }

@@ -845,6 +845,12 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="userAccount" ref="userAccount10" />
+		<property name="items">
+			<list>
+			<ref bean="item1"/>
+			</list>
+		</property>	
+		
 	</bean>
 	
 	<bean id="actor11" class="domain.Provider">
@@ -860,6 +866,10 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="userAccount" ref="userAccount11" />
+		<property name="items">
+			<list>
+			</list>
+		</property>	
 	</bean>
 	
 	<!-- Finders -->

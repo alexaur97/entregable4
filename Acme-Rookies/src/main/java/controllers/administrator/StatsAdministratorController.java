@@ -13,11 +13,14 @@ import services.ApplicationService;
 import services.AuditService;
 import services.CompanyService;
 import services.FinderService;
+import services.ItemService;
 import services.PositionService;
+import services.ProviderService;
 import services.RookieService;
 import controllers.AbstractController;
 import domain.Company;
 import domain.Position;
+import domain.Provider;
 import domain.Rookie;
 
 @Controller
@@ -42,6 +45,12 @@ public class StatsAdministratorController extends AbstractController {
 	@Autowired
 	private AuditService		auditService;
 
+	@Autowired
+	private ItemService			itemService;
+
+	@Autowired
+	private ProviderService		providerService;
+
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
@@ -63,7 +72,11 @@ public class StatsAdministratorController extends AbstractController {
 			final Collection<Object> statsAuditScorePerCompany = this.auditService.statsAuditScorePerCompany();
 			final Collection<Company> companiesWithHighestAuditScore = this.companyService.companiesWithHighestAuditScore();
 			final Double avgSalaryHighestPositions = this.positionService.avgSalaryHighestPositions();
+			final Collection<Double> statsNumberItemsPerProvider = this.itemService.statsNumberItemsPerProvider();
+			final Collection<Provider> top5ProvidersPerItems = this.providerService.top5ProvidersPerItems();
 
+			result.addObject("top5ProvidersPerItems", top5ProvidersPerItems);
+			result.addObject("statsNumberItemsPerProvider", statsNumberItemsPerProvider);
 			result.addObject("avgSalaryHighestPositions", avgSalaryHighestPositions);
 			result.addObject("companiesWithHighestAuditScore", companiesWithHighestAuditScore);
 			result.addObject("statsAuditScorePerCompany", statsAuditScorePerCompany);
