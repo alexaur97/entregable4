@@ -19,4 +19,7 @@ public interface ProviderRepository extends JpaRepository<Provider, Integer> {
 
 	@Query("select p from Provider p order by p.items.size desc")
 	Collection<Provider> top5ProvidersPerItems();
+
+	@Query("select p from Provider p where (select count(s) from Sponsorship s where s.provider.id = p.id) > (1.10*(select avg(1.0*(select count(s) from Sponsorship s where s.provider.id = pr.id)) from Provider pr)))")
+	Collection<Provider> providersWithMoreThan10pcSponsorships();
 }

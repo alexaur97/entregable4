@@ -190,7 +190,12 @@
 		<td><div style="text-align:center"><jstl:out value="${x[1]}" /></div></td>
 		<td><div style="text-align:center"><jstl:out value="${x[2]}" /></div></td>
 		<td><div style="text-align:center"><jstl:out value="${x[3]}" /></div></td>
+		<jstl:if test="${x[4] eq null}">
+		<td><div style="text-align:center">-</div></td>
+		</jstl:if>
+		<jstl:if test="${x[4] > -1}">
 		<td><div style="text-align:center"><jstl:out value="${x[4]}" /></div></td>
+		</jstl:if>
 	</tr>
 	</jstl:forEach>
 	
@@ -212,7 +217,12 @@
 		<td><div style="text-align:center"><jstl:out value="${x[1]}" /></div></td>
 		<td><div style="text-align:center"><jstl:out value="${x[2]}" /></div></td>
 		<td><div style="text-align:center"><jstl:out value="${x[3]}" /></div></td>
+		<jstl:if test="${x[4] eq null}">
+		<td><div style="text-align:center">-</div></td>
+		</jstl:if>
+		<jstl:if test="${x[4] > -1}">
 		<td><div style="text-align:center"><jstl:out value="${x[4]}" /></div></td>
+		</jstl:if>
 	</tr>
 	</jstl:forEach>
 </table>
@@ -259,6 +269,57 @@
 <ul>
 	<jstl:forEach items="${top5ProvidersPerItems}" var="x">
 		<li><jstl:out value="${x.name} ${x.surnames} : ${fn:length(x.items)}" /></li>
+	</jstl:forEach>
+</ul>
+<br />
+
+<h3>
+<spring:message code="stats.SponsorshipsByProvider" /> :
+</h3>
+<spring:message code="stats.SponsorshipsByProvider.average" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][0]}" />
+<br />
+<spring:message code="stats.SponsorshipsByProvider.min" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][1]}" />
+<br />
+<spring:message code="stats.SponsorshipsByProvider.max" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][2]}" />
+<br />
+<spring:message code="stats.SponsorshipsByProvider.stddev" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][3]}" />
+<br />
+
+<h3>
+<spring:message code="stats.SponsorshipsByPosition" /> :
+</h3>
+<spring:message code="stats.SponsorshipsByPosition.average" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][0]}" />
+<br />
+<spring:message code="stats.SponsorshipsByPosition.min" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][1]}" />
+<br />
+<spring:message code="stats.SponsorshipsByPosition.max" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][2]}" />
+<br />
+<spring:message code="stats.SponsorshipsByPosition.stddev" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][3]}" />
+<br />
+
+<br />
+<h3>
+<spring:message code="stats.providersWithMoreThan10pcSponsorships" /> :
+</h3>
+<ul>
+	<jstl:forEach items="${providersWithMoreThan10pcSponsorships}" var="x">
+		<li><jstl:out value="${x.name} ${x.surnames}" /></li>
 	</jstl:forEach>
 </ul>
 <br />

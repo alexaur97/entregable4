@@ -17,6 +17,7 @@ import services.ItemService;
 import services.PositionService;
 import services.ProviderService;
 import services.RookieService;
+import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Company;
 import domain.Position;
@@ -51,6 +52,9 @@ public class StatsAdministratorController extends AbstractController {
 	@Autowired
 	private ProviderService		providerService;
 
+	@Autowired
+	private SponsorshipService	sponsorshipService;
+
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
@@ -74,7 +78,13 @@ public class StatsAdministratorController extends AbstractController {
 			final Double avgSalaryHighestPositions = this.positionService.avgSalaryHighestPositions();
 			final Collection<Double> statsNumberItemsPerProvider = this.itemService.statsNumberItemsPerProvider();
 			final Collection<Provider> top5ProvidersPerItems = this.providerService.top5ProvidersPerItems();
+			final Collection<Double> statsSponsorshipsByProvider = this.sponsorshipService.statsSponsorshipsByProvider();
+			final Collection<Double> statsSponsorshipsByPosition = this.sponsorshipService.statsSponsorshipsByPosition();
+			final Collection<Provider> providersWithMoreThan10pcSponsorships = this.providerService.providersWithMoreThan10pcSponsorships();
 
+			result.addObject("providersWithMoreThan10pcSponsorships", providersWithMoreThan10pcSponsorships);
+			result.addObject("statsSponsorshipsByPosition", statsSponsorshipsByPosition);
+			result.addObject("statsSponsorshipsByProvider", statsSponsorshipsByProvider);
 			result.addObject("top5ProvidersPerItems", top5ProvidersPerItems);
 			result.addObject("statsNumberItemsPerProvider", statsNumberItemsPerProvider);
 			result.addObject("avgSalaryHighestPositions", avgSalaryHighestPositions);

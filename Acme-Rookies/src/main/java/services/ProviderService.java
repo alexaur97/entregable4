@@ -98,4 +98,10 @@ public class ProviderService {
 			}
 		return result;
 	}
+
+	public Collection<Provider> providersWithMoreThan10pcSponsorships() {
+		final Collection<Provider> result = this.providerRepository.providersWithMoreThan10pcSponsorships();
+		return result;
+	}
+
 }
