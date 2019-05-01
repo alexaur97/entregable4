@@ -174,4 +174,9 @@ public class CompanyService {
 		Assert.notNull(res);
 		return res;
 	}
+
+	public Collection<Company> companiesWithHighestAuditScore() {
+		final Collection<Company> result = this.companyRepository.companiesWithHighestAuditScore();
+		return result;
+	}
 }
