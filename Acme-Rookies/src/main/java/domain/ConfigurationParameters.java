@@ -27,7 +27,7 @@ public class ConfigurationParameters extends DomainEntity {
 	private Integer		finderCachedHours;
 	private Integer		finderMaxResults;
 	private Boolean	welcomeNotify;
-	private Double		VATtax;
+	private Integer		VATtax;
 
 
 	@NotBlank
@@ -111,11 +111,11 @@ public class ConfigurationParameters extends DomainEntity {
 	@Min(0)
 	@Max(100)
 	@NotNull
-	public Double getVATtax() {
+	public Integer getVATtax() {
 		return VATtax;
 	}
 
-	public void setVATtax(Double vATtax) {
+	public void setVATtax(Integer vATtax) {
 		VATtax = vATtax;
 	}
 }
