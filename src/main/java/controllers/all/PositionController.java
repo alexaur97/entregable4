@@ -15,14 +15,19 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import security.LoginService;
 import services.PositionService;
+import services.SponsorshipService;
 import domain.Position;
+import domain.Sponsorship;
 
 @Controller
 @RequestMapping("/position")
 public class PositionController {
 
 	@Autowired
-	private PositionService	positionService;
+	private PositionService		positionService;
+
+	@Autowired
+	private SponsorshipService	sponsorshipService;
 
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -93,6 +98,7 @@ public class PositionController {
 
 		try {
 			Assert.notNull(positionId);
+			final Sponsorship sponsorship = this.sponsorshipService.randomSponshorship(positionId);
 			position = this.positionService.findOne(positionId);
 
 			Assert.isTrue(position.getMode().equals("FINAL"));
@@ -106,6 +112,7 @@ public class PositionController {
 			result = new ModelAndView("position/show");
 			result.addObject("position", position);
 			result.addObject("b", b);
+			result.addObject("sponsorship", sponsorship);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/#");
 		}

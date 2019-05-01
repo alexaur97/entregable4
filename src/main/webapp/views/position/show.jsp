@@ -21,6 +21,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<img src="${sponsorship.banner}" width="400" height="100"></img>
+<br/>
 <spring:message code="position.title"/>: <jstl:out value="${position.title}"></jstl:out>
 <br/>
 <spring:message code="position.description"/>: <jstl:out value="${position.description}"></jstl:out>
