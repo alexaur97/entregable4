@@ -10,7 +10,9 @@ import domain.Provider;
 @Repository
 public interface ProviderRepository extends JpaRepository<Provider, Integer> {
 
-	@Query("select p from Provider p where p.userAccount.id=?1")
+	//@Query("") 
+	//Method 
+	@Query("select a from Provider a where a.userAccount.id=?1")
 	Provider findByUserId(int id);
 
 }

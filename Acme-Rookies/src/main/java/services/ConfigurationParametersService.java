@@ -41,6 +41,8 @@ public class ConfigurationParametersService {
 			config.setCountryCode("+34");
 			config.setFinderCachedHours(1);
 			config.setFinderMaxResults(10);
+			config.setWelcomeNotify(false);
+			config.setVATtax(21);
 
 			/*
 			 * final Collection<String> positions = new ArrayList<>();

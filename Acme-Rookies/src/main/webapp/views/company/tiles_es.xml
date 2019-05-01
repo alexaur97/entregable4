@@ -24,5 +24,8 @@
 		<put-attribute name="title" value="Empresas" />
 		<put-attribute name="body" value="/views/company/list.jsp" />
 	</definition>
-
+<definition name="company/listScore" extends="master.page">
+		<put-attribute name="title" value="Puntuacion de Empresa"/>
+		<put-attribute name="body" value="/views/company/listScore.jsp" />
+	</definition>
 </tiles-definitions>

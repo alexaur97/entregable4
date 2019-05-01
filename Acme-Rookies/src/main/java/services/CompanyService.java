@@ -174,4 +174,13 @@ public class CompanyService {
 		Assert.notNull(res);
 		return res;
 	}
+	public Collection<Double> scores() {
+		final Collection<Company> companies = this.findAll();
+		final Collection<Double> scores = new ArrayList<>();
+		for (final Company company : companies) {
+			final Double a = this.companyRepository.score(company.getId());
+			scores.add(a);
+		}
+		return scores;
+	}
 }

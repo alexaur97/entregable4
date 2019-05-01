@@ -26,7 +26,9 @@ public class ProviderService {
 	private ActorService		actorService;
 
 
+
 	//Supporting Services ------------------
+
 
 	//COnstructors -------------------------
 	public ProviderService() {
@@ -83,6 +85,7 @@ public class ProviderService {
 		final Provider p = this.providerRepository.findByUserId(id);
 		return p;
 	}
+	
 
 	//Other Methods--------------------
 }

@@ -24,5 +24,9 @@
 		<put-attribute name="title" value="Companies" />
 		<put-attribute name="body" value="/views/company/list.jsp" />
 	</definition>
+	<definition name="company/listScore" extends="master.page">
+		<put-attribute name="title" value="Companies Score" />
+		<put-attribute name="body" value="/views/company/listScore.jsp" />
+	</definition>
 
 </tiles-definitions>

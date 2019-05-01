@@ -44,7 +44,9 @@
 <br>
 <br>
 <br>
-
+	<security:authorize access="hasRole('AUDITOR')">
+	<acme:cancel url="/auditor/auditor/editPosition.do" code="position.editPos" />
+	</security:authorize>
 <security:authorize access="hasRole('COMPANY')">
 	<acme:cancel url="/position/company/create.do" code="position.create" />
 </security:authorize>

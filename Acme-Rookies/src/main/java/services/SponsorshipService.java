@@ -78,4 +78,7 @@ public class SponsorshipService {
 		}
 		return result;
 	}
+	public Collection<Sponsorship> findByProvider(final Integer providerId) {
+		return this.sponsorshipRepository.findSponshorshipsByProvider(providerId);
+	}
 }
