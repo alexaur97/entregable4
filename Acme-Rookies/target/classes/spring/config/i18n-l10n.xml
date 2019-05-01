@@ -38,7 +38,7 @@
 		<value>/views/curriculum/messages</value>
 			<value>/views/application/messages</value>
 		<value>/views/socialprofile/messages</value>
-			
+		<value>/views/auditor/messages</value>
 			<value>/views/personalData/messages</value>
 			<value>/views/positionData/messages</value>
 			<value>/views/educationData/messages</value>
