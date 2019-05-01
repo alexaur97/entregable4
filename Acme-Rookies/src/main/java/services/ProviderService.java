@@ -1,38 +1,40 @@
-package services; 
 
-import java.util.Collection; 
+package services;
 
-import org.springframework.beans.factory.annotation.Autowired; 
-import org.springframework.stereotype.Service; 
-import org.springframework.transaction.annotation.Transactional; 
-import org.springframework.util.Assert; 
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.ProviderRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
+import domain.Provider;
 
-import domain.Provider; 
-import domain.Sponsorship;
-
-@Service 
-@Transactional 
-public class ProviderService { 
+@Service
+@Transactional
+public class ProviderService {
 
 	//Managed repository -------------------
 	@Autowired
-	private ProviderRepository providerRepository;
+	private ProviderRepository	providerRepository;
+	@Autowired
+	private ActorService		actorService;
 
 
 	//Supporting Services ------------------
 
-
 	//COnstructors -------------------------
-	public ProviderService(){
+	public ProviderService() {
 		super();
 	}
 
-
 	//Simple CRUD methods--------------------
 
-	public Provider create(){
+	public Provider create() {
 		Provider result;
 
 		result = new Provider();
@@ -40,32 +42,44 @@ public class ProviderService {
 		return result;
 	}
 
-	public Collection<Provider> findAll(){
+	public Collection<Provider> findAll() {
 		Collection<Provider> result;
 
-		result = providerRepository.findAll();
+		result = this.providerRepository.findAll();
 
 		return result;
 	}
 
-	public Provider findOne(int providerId){
+	public Provider findOne(final int providerId) {
 		Provider result;
 
-		result = providerRepository.findOne(providerId);
+		result = this.providerRepository.findOne(providerId);
 
 		return result;
 	}
 
-	public void save(Provider provider){
+	public void save(final Provider provider) {
 		Assert.notNull(provider);
 
-		providerRepository.save(provider);
+		this.providerRepository.save(provider);
 	}
 
-	public void delete(Provider provider){
-		providerRepository.delete(provider);
+	public void delete(final Provider provider) {
+		this.providerRepository.delete(provider);
 	}
+	public Provider findByPrincipal() {
+		final UserAccount user = LoginService.getPrincipal();
+		Assert.notNull(user);
 
+		final Provider a = this.findByUserId(user.getId());
+		Assert.notNull(a);
+		this.actorService.auth(a, Authority.PROVIDER);
+		return a;
+	}
+	public Provider findByUserId(final int id) {
+		final Provider a = this.providerRepository.findByUserId(id);
+		return a;
+	}
 
 	//Other Methods--------------------
-} 
+}

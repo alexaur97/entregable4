@@ -61,7 +61,10 @@
 			<li><a class="fNiv" href="problem/company/list.do"><spring:message
 						code="master.page.company.list" /></a></li>
 		</security:authorize>
-
+<security:authorize access="hasRole('PROVIDER')">
+			<li><a class="fNiv" href="sponsorship/provider/list.do"><spring:message
+						code="master.page.sponsorship" /></a></li>
+		</security:authorize>
 		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv"> <spring:message
 						code="master.page.profile" /> (<security:authentication
