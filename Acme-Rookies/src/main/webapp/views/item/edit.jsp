@@ -40,10 +40,10 @@
 					
 						
 						<acme:submit name="save" code="item.save" />
-						<jstl:if test="${item.id!=0}">
+						 <jstl:if test="${item.id!=0}">
 							<acme:submitConfirmation name="delete" code="position.delete"
 								onclick="position.delete.confirmation" />
-						</jstl:if>
+						</jstl:if> 
 						<acme:cancel url="/item/provider/list.do"
 							code="item.cancel" />
 					</div>

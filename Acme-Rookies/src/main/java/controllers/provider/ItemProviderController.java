@@ -119,6 +119,40 @@ public class ItemProviderController {
 
 		return res;
 	}
+
+	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Item item, final BindingResult binding) {
+		ModelAndView result;
+		final Item res = this.itemService.findOne(item.getId());
+		try {
+
+			this.itemService.delete(res);
+			result = new ModelAndView("redirect:/item/provider/list.do");
+
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(res, oops.getMessage());
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int itemId) {
+		ModelAndView result;
+		try {
+			Assert.notNull(itemId);
+			//			final Company company = this.companyService.findByPrincipal();
+			final Item item = this.itemService.findOne(itemId);
+			Assert.notNull(item);
+			//			Assert.isTrue(problem.getCompany().equals(company));
+			result = new ModelAndView("item/show");
+			result.addObject("item", item);
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/#");
+		}
+		return result;
+	}
+
 	protected ModelAndView createEditModelAndView(final Item item) {
 		return this.createEditModelAndView(item, null);
 	}
