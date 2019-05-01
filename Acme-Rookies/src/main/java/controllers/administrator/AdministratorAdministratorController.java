@@ -6,6 +6,8 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import miscellaneous.Utils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -64,6 +66,8 @@ public class AdministratorAdministratorController extends AbstractController {
 					result.addObject("message", "register.email.error");
 				else if (!administratorRegisterForm.getConfirmPassword().equals(administratorRegisterForm.getPassword()))
 					result.addObject("message", "register.password.error");
+				else if (Utils.creditCardIsExpired(administratorRegisterForm.getExpirationMonth(), administratorRegisterForm.getExpirationYear()))
+					result.addObject("message", "register.expired.card.error");
 				else
 					result.addObject("message", "register.commit.error");
 			}

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+
+<!-- * tiles.xml * * Copyright (C) 2019 Universidad de Sevilla * * The use 
+
 	of this project is hereby constrained to the conditions of the * TDG Licence, 
 	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
@@ -17,5 +20,11 @@
 		<put-attribute name="body" value="/views/auditor/edit.jsp" />
 	</definition>
 	
+<tiles-definitions>
+
+	<definition name="auditor/create" extends="master.page">
+		<put-attribute name="title" value="Create new auditor" />
+		<put-attribute name="body" value="/views/auditor/create.jsp" />
+	</definition>
 
 </tiles-definitions>
