@@ -41,6 +41,7 @@ public class AuditorService {
 	private Validator				validator;
 
 
+
 	//Supporting Services ------------------
 
 	//Supporting Services ------------------
@@ -128,6 +129,9 @@ public class AuditorService {
 		final Auditor res = auditor;
 		final Auditor a = this.findOne(auditor.getId());
 
+		final Collection<Position> positions = a.getPositions();
+
+		res.getPositions().addAll(positions);
 		res.setAddress(a.getAddress());
 		res.setBanned(a.getBanned());
 		res.setCreditCard(a.getCreditCard());

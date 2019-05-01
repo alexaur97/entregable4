@@ -59,4 +59,7 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 
 	@Query("select avg(1.0*p.salaryOffered) from Position p where (select avg(1.0*(a.score)) from Audit a where a.position.id = p.id and a.mode='FINAL') = (select max(1.0*(select avg(1.0*(au.score)) from Audit au where au.position.id = pa.id and au.mode='FINAL')) from Position pa)")
 	Double avgSalaryHighestPositions();
+	@Query("select p from Position p where p.mode='FINAL' and p.cancelled is false and p.company.banned is false")
+	Collection<Position> findPositionsReq();
+
 }

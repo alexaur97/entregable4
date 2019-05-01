@@ -86,22 +86,29 @@ public class AuditAuditorController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("audit") Audit audit, final BindingResult binding) {
 		ModelAndView res;
-		audit = this.auditService.reconstruct(audit, binding);
+		try {
+			Assert.notNull(audit.getPosition());
 
-		if (binding.hasErrors())
-			res = this.createEditModelAndView(audit);
-		else
-			try {
+			audit = this.auditService.reconstruct(audit, binding);
 
-				this.auditService.save(audit);
-				res = new ModelAndView("redirect:/audit/auditor/myList.do");
+			if (binding.hasErrors())
+				res = this.createEditModelAndView(audit);
+			else
+				try {
 
-			} catch (final Throwable oops) {
+					this.auditService.save(audit);
+					res = new ModelAndView("redirect:/audit/auditor/myList.do");
 
-				res = this.createEditModelAndView(audit, "audit.commit.error");
+				} catch (final Throwable oops) {
 
-			}
+					res = this.createEditModelAndView(audit, "audit.commit.error");
 
+				}
+		} catch (final Throwable oops) {
+
+			res = this.createEditModelAndView(audit, "audit.position.error");
+
+		}
 		return res;
 	}
 
@@ -111,6 +118,11 @@ public class AuditAuditorController {
 		final Audit au = this.auditService.findOne(audit.getId());
 		try {
 
+			final Audit auditDB = this.auditService.findOne(audit.getId());
+			Assert.notNull(auditDB);
+
+			final Collection<Audit> audits = this.auditService.findByPrincipal();
+			Assert.isTrue(audits.contains(auditDB));
 			this.auditService.delete(au);
 			result = new ModelAndView("redirect:/audit/auditor/myList.do");
 
