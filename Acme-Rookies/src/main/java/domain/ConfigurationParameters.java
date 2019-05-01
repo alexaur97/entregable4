@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -11,6 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
+
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,9 +24,10 @@ public class ConfigurationParameters extends DomainEntity {
 	private String	sysMessage;
 	private String	sysMessageEs;
 	private String	countryCode;
-	private int		finderCachedHours;
-	private int		finderMaxResults;
+	private Integer		finderCachedHours;
+	private Integer		finderMaxResults;
 	private Boolean	welcomeNotify;
+	private Double		VATtax;
 
 
 	@NotBlank
@@ -78,28 +82,40 @@ public class ConfigurationParameters extends DomainEntity {
 	}
 
 	@NotNull
-	public int getFinderCachedHours() {
+	public Integer getFinderCachedHours() {
 		return this.finderCachedHours;
 	}
 
-	public void setFinderCachedHours(final int finderCachedHours) {
+	public void setFinderCachedHours(final Integer finderCachedHours) {
 		this.finderCachedHours = finderCachedHours;
 	}
 
 	@NotNull
-	public int getFinderMaxResults() {
+	public Integer getFinderMaxResults() {
 		return this.finderMaxResults;
 	}
 
-	public void setFinderMaxResults(final int finderMaxResults) {
+	public void setFinderMaxResults(final Integer finderMaxResults) {
 		this.finderMaxResults = finderMaxResults;
 	}
 
+	@NotNull
 	public Boolean getWelcomeNotify() {
 		return this.welcomeNotify;
 	}
 
 	public void setWelcomeNotify(final Boolean welcomeNotify) {
 		this.welcomeNotify = welcomeNotify;
+	}
+
+	@Min(0)
+	@Max(100)
+	@NotNull
+	public Double getVATtax() {
+		return VATtax;
+	}
+
+	public void setVATtax(Double vATtax) {
+		VATtax = vATtax;
 	}
 }

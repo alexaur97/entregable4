@@ -23,7 +23,6 @@ public class Sponsorship extends DomainEntity {
 	private Provider provider;
 	private Position position;
 	
-	@NotNull
 	@Valid
 	@ManyToOne(cascade = CascadeType.ALL, optional = false)
 	public CreditCard getCreditCard() {
