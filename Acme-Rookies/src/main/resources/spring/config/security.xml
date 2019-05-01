@@ -102,6 +102,9 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/actor/edit.do"
 			access="isAuthenticated()" />
+			
+		<security:intercept-url pattern="/audit/display.do"
+			access="isAuthenticated()" />
 
 		<security:intercept-url pattern="/actor/editAdm.do"
 			access="hasRole('ADMINISTRATOR')"  />

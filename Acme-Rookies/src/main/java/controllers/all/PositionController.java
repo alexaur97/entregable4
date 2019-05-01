@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
 import security.LoginService;
+import services.AuditService;
 import services.PositionService;
 import services.SponsorshipService;
+import domain.Audit;
 import domain.Position;
 import domain.Sponsorship;
 
@@ -28,6 +30,9 @@ public class PositionController {
 
 	@Autowired
 	private SponsorshipService	sponsorshipService;
+
+	@Autowired
+	private AuditService		auditService;
 
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -112,10 +117,17 @@ public class PositionController {
 				Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 			}
 			final Boolean b = position.getProblems().isEmpty();
+
+			Boolean d = true;
+			final Collection<Audit> audit = this.auditService.findByPosition(positionId);
+			if (audit.isEmpty())
+				d = false;
 			result = new ModelAndView("position/show");
 			result.addObject("position", position);
+			result.addObject("audit", audit);
 			result.addObject("b", b);
 			result.addObject("c", c);
+			result.addObject("d", d);
 			result.addObject("sponsorship", sponsorship);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/#");
