@@ -53,4 +53,36 @@ public class AdministratorServiceTest extends AbstractTest {
 		this.administratorService.save(adm);
 		super.unauthenticate();
 	}
+
+	//	Para el caso negativo estamos intentando que un actor que no es administrador cree un nuevo administrador.
+	//Esto debe provocar un error.
+	//Análisis del sentence coverage: el sistema al llamar al metodo del servicio "create" comprueba
+	// que el actor logueado no tiene la autoridad ADMINISTRATOR.
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateAdministratorError() {
+		super.authenticate("company1");
+		Administrator adm = this.administratorService.create();
+		final AdministratorRegisterForm form = new AdministratorRegisterForm();
+		form.setName("name");
+		form.setVAT("ES66666668");
+		form.setSurnames("surnames");
+		form.setPhoto("https://img.lovepik.com/element/40025/1507.png_860.png");
+		form.setEmail("name@");
+		form.setPhone("667890477");
+		form.setAddress("Reina Mercedes");
+		form.setUsername("username");
+		form.setPassword("Ertuuuuuu7888");
+		form.setConfirmPassword("Ertuuuuuu7888");
+		form.setBrandName("Visa");
+		form.setCvv(194);
+		form.setExpirationMonth(02);
+		form.setExpirationYear(22);
+		form.setHolderName("Paolo Luna Rodríguez");
+		form.setNumber("4278959519763522");
+
+		adm = this.administratorService.reconstruct(form);
+		this.administratorService.save(adm);
+		super.unauthenticate();
+	}
 }
