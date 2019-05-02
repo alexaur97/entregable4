@@ -54,10 +54,10 @@
 </jstl:if>
 <br/>
 
-<jstl:if test="${d eq true}">
+<jstl:if test="${d eq false}">
 <h2><spring:message code="position.noaudits"/></h2>
 </jstl:if>
-<jstl:if test="${d eq false}">
+<jstl:if test="${d eq true}">
 <h2><spring:message code="position.audits"/>:</h2>
 <ul>
 	<jstl:forEach items="${audit}" var="x">

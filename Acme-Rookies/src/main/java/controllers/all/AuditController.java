@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AuditService;
+import controllers.AbstractController;
 import domain.Audit;
 
 @Controller
 @RequestMapping("/audit")
-public class AuditController {
+public class AuditController extends AbstractController {
 
 	@Autowired
 	private AuditService	auditService;

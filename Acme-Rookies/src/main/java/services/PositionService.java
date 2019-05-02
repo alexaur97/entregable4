@@ -85,6 +85,7 @@ public class PositionService {
 	}
 	public void delete(final Position position) {
 		Assert.isTrue(position.getMode().equals("DRAFT"));
+
 		this.positionRepository.delete(position);
 	}
 

@@ -28,6 +28,6 @@
 <acme:display code="audit.auditor" path="${audit.auditor.name}"/>
 
 
-<acme:button url="/position/list.do" code="audit.back"/>
+<acme:button url="/position/show.do?positionId=${audit.position.id}" code="audit.back"/>
 <br/>
 
