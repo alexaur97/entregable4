@@ -19,16 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.CurriculumService;
 import services.RookieService;
+import controllers.AbstractController;
 import domain.Curriculum;
 import domain.EducationData;
-import domain.Rookie;
 import domain.MiscellaniusData;
 import domain.PositionData;
+import domain.Rookie;
 import forms.CurriculumCreateForm;
 
 @Controller
 @RequestMapping("/curriculum/rookie")
-public class CurriculumRookieController {
+public class CurriculumRookieController extends AbstractController {
 
 	@Autowired
 	private CurriculumService	curriculumService;

@@ -19,12 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.FinderService;
 import services.RookieService;
+import controllers.AbstractController;
 import domain.Rookie;
 import forms.RookieRegisterForm;
 
 @Controller
 @RequestMapping("/rookie")
-public class RookieController {
+public class RookieController extends AbstractController {
 
 	@Autowired
 	private RookieService	rookieService;

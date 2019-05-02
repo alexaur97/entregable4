@@ -17,13 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import services.CurriculumService;
 import services.EducationDataService;
 import services.RookieService;
+import controllers.AbstractController;
 import domain.Curriculum;
 import domain.EducationData;
 import domain.Rookie;
 
 @Controller
 @RequestMapping("/educationData/rookie/")
-public class EducationDataRookieController {
+public class EducationDataRookieController extends AbstractController {
 
 	@Autowired
 	private EducationDataService	educationDataService;

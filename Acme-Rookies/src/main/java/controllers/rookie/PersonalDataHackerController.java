@@ -17,14 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CurriculumService;
-import services.RookieService;
 import services.PersonalDataService;
+import services.RookieService;
+import controllers.AbstractController;
 import domain.Curriculum;
 import domain.PersonalData;
 
 @Controller
 @RequestMapping("/personalData/rookie")
-public class PersonalDataHackerController {
+public class PersonalDataHackerController extends AbstractController {
 
 	@Autowired
 	private PersonalDataService	personalDataService;

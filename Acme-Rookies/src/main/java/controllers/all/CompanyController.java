@@ -23,13 +23,14 @@ import security.LoginService;
 import services.ActorService;
 import services.CompanyService;
 import services.PositionService;
+import controllers.AbstractController;
 import domain.Company;
 import domain.Position;
 import forms.CompanyRegisterForm;
 
 @Controller
 @RequestMapping("/company")
-public class CompanyController {
+public class CompanyController extends AbstractController {
 
 	@Autowired
 	private CompanyService	companyService;

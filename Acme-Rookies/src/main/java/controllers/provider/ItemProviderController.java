@@ -18,12 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.ItemService;
 import services.ProviderService;
+import controllers.AbstractController;
 import domain.Item;
 import domain.Provider;
 
 @Controller
 @RequestMapping("/item/provider/")
-public class ItemProviderController {
+public class ItemProviderController extends AbstractController {
 
 	@Autowired
 	ItemService		itemService;

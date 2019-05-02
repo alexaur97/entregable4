@@ -15,13 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AuditService;
 import services.AuditorService;
+import controllers.AbstractController;
 import domain.Audit;
 import domain.Auditor;
 import domain.Position;
 
 @Controller
 @RequestMapping("/audit/auditor/")
-public class AuditAuditorController {
+public class AuditAuditorController extends AbstractController {
 
 	@Autowired
 	private AuditService	auditService;
