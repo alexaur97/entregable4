@@ -16,7 +16,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Acme Rookies Co., Inc."
+	<a href="#"><img src="${banner}" alt="Acme Rookies Co., Inc."
 		style="margin-bottom: 0.5em;" /></a>
 </div>
 
@@ -144,7 +144,9 @@
 								code="master.page.register.company" /></a></li>
 					<li><a href="rookie/signup.do"><spring:message
 								code="master.page.register.rookie" /></a></li>
-
+					<li><a href="provider/signup.do"><spring:message
+								code="master.page.register.provider" /></a></li>
+					
 				</ul></li>
 		</security:authorize>
 	</ul>

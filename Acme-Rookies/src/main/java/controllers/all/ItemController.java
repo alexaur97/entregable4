@@ -12,11 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ItemService;
 import services.ProviderService;
+import controllers.AbstractController;
 import domain.Item;
 
 @Controller
 @RequestMapping("/item")
-public class ItemController {
+public class ItemController extends AbstractController {
 
 	@Autowired
 	ItemService		itemService;

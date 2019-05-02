@@ -13,12 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AuditorService;
 import services.PositionService;
+import controllers.AbstractController;
 import domain.Auditor;
 import domain.Position;
 
 @Controller
 @RequestMapping("auditor/auditor")
-public class AuditorAuditorController {
+public class AuditorAuditorController extends AbstractController {
 
 	@Autowired
 	private PositionService	positionService;
