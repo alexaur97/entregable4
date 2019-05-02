@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Date;
@@ -24,21 +25,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Audit extends DomainEntity {
 
-	private String				text;
-	private Date				moment;
-	private Integer				score;
-	private String				mode;
+	private String		text;
+	private Date		moment;
+	private Integer		score;
+	private String		mode;
 
-	private Auditor				auditor;
-	private Position			position;
+	private Auditor		auditor;
+	private Position	position;
+
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	@NotBlank
 	public String getText() {
-		return text;
+		return this.text;
 	}
 
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 	}
 
@@ -46,31 +48,32 @@ public class Audit extends DomainEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past
 	public Date getMoment() {
-		return moment;
+		return this.moment;
 	}
 
-	public void setMoment(Date moment) {
+	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
 
+	@NotNull
 	@Min(0)
 	@Max(10)
 	public Integer getScore() {
-		return score;
+		return this.score;
 	}
 
-	public void setScore(Integer score) {
+	public void setScore(final Integer score) {
 		this.score = score;
 	}
-	
+
 	@NotBlank
 	@Pattern(regexp = "^DRAFT|FINAL$")
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getMode() {
-		return mode;
+		return this.mode;
 	}
 
-	public void setMode(String mode) {
+	public void setMode(final String mode) {
 		this.mode = mode;
 	}
 
@@ -78,23 +81,22 @@ public class Audit extends DomainEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	public Auditor getAuditor() {
-		return auditor;
+		return this.auditor;
 	}
 
-	public void setAuditor(Auditor auditor) {
+	public void setAuditor(final Auditor auditor) {
 		this.auditor = auditor;
 	}
-	
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
 	public Position getPosition() {
-		return position;
+		return this.position;
 	}
 
-	public void setPosition(Position position) {
+	public void setPosition(final Position position) {
 		this.position = position;
 	}
-
 
 }

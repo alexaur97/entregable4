@@ -16,7 +16,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Acme Rookies Co., Inc."
+	<a href="#"><img src="${banner}" alt="Acme Rookies Co., Inc."
 		style="margin-bottom: 0.5em;" /></a>
 </div>
 
@@ -40,6 +40,10 @@
 						code="master.page.finder" /></a></li>
 		</security:authorize>
 
+		<security:authorize access="hasRole('AUDITOR')">
+			<li><a href="audit/auditor/myList.do"><spring:message code="master.page.audits" /></a></li>
+		</security:authorize>
+		
 		<security:authorize access="hasRole('COMPANY')">
 			<li><a class="fNiv" href="position/company/myList.do"><spring:message
 						code="master.page.myPositions" /></a></li>
@@ -57,11 +61,24 @@
 
 		<li><a class="fNiv" href="company/list.do"><spring:message
 					code="master.page.companies" /></a></li>
+		
+		<li><a class="fNiv" href="provider/list.do"><spring:message
+					code="master.page.providers" /></a></li>
+		
+		<li><a class="fNiv" href="item/list.do"><spring:message
+					code="master.page.items" /></a></li>
 
 		<security:authorize access="hasRole('COMPANY')">
 			<li><a class="fNiv" href="problem/company/list.do"><spring:message
 						code="master.page.company.list" /></a></li>
 		</security:authorize>
+		
+			<security:authorize access="hasRole('PROVIDER')">
+			<li><a class="fNiv" href="item/provider/list.do"><spring:message
+						code="master.page.item.list" /></a></li>
+		</security:authorize>
+
+
 <security:authorize access="hasRole('PROVIDER')">
 			<li><a class="fNiv" href="sponsorship/provider/list.do"><spring:message
 						code="master.page.sponsorship" /></a></li>
@@ -127,7 +144,9 @@
 								code="master.page.register.company" /></a></li>
 					<li><a href="rookie/signup.do"><spring:message
 								code="master.page.register.rookie" /></a></li>
-
+					<li><a href="provider/signup.do"><spring:message
+								code="master.page.register.provider" /></a></li>
+					
 				</ul></li>
 		</security:authorize>
 	</ul>

@@ -115,4 +115,13 @@ public class SponsorshipService {
 		this.validator.validate(sponsorshipFinal, binding);
 		return sponsorshipFinal;
 	}
+	public Collection<Double> statsSponsorshipsByProvider() {
+		final Collection<Double> result = this.sponsorshipRepository.statsSponsorshipsByProvider();
+		return result;
+	}
+
+	public Collection<Double> statsSponsorshipsByPosition() {
+		final Collection<Double> result = this.sponsorshipRepository.statsSponsorshipsByPosition();
+		return result;
+	}
 }

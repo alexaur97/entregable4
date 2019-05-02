@@ -72,7 +72,7 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 				formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 				moment = formatter.format(new Date());
 
-				//añadimos en el modelo todos los elementos necesarios>>>>>
+				//añadimos en el modelo todos los elementos necesarios
 				result.addObject("name", name);
 				result.addObject("sysMessage", sysMessage);
 				result.addObject("moment", moment);

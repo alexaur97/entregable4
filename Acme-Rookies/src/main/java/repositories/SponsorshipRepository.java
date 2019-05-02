@@ -20,4 +20,10 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	@Query("select s from Sponsorship s where s.provider.id = ?1")
 	Collection<Sponsorship> findSponshorshipsByProvider(int providerId);
 
+	@Query("select avg(1.0*(select count(s) from Sponsorship s where s.provider.id = p.id)), min(1.0*(select count(s) from Sponsorship s where s.provider.id = p.id)), max(1.0*(select count(s) from Sponsorship s where s.provider.id = p.id)),stddev(1.0*(select count(s) from Sponsorship s where s.provider.id = p.id)) from Provider p")
+	Collection<Double> statsSponsorshipsByProvider();
+
+	@Query("select avg(1.0*(select count(s) from Sponsorship s where s.position.id = p.id)), min(1.0*(select count(s) from Sponsorship s where s.position.id = p.id)), max(1.0*(select count(s) from Sponsorship s where s.position.id = p.id)),stddev(1.0*(select count(s) from Sponsorship s where s.position.id = p.id)) from Position p")
+	Collection<Double> statsSponsorshipsByPosition();
+
 }

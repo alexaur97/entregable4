@@ -45,7 +45,7 @@
 						
 						<acme:submit name="save" code="auditor.save" />
 						
-						<acme:cancel url="/audit/auditor/myList.do"
+						<acme:cancel url="/position/list.do"
 							code="auditor.cancel" />
 					</div>
 				</form:form>

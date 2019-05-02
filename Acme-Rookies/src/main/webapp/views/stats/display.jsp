@@ -22,6 +22,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <h3>
 <spring:message code="stats.position.company" /> :
@@ -143,32 +144,183 @@
 <jstl:out value="${curriculaPerRookie[0][3]}" />
 <br />
 
-<h4><spring:message code="stats.finder" /></h4>
+<h4><spring:message code="stats.finder" />:</h4> 
 
 <table>
+	
 	<tr>
-		<th><spring:message code="stats.finder.avg" /></th>
-		<th><spring:message code="stats.finder.min" /></th>
-		<th><spring:message code="stats.finder.max" /></th>
-		<th><spring:message code="stats.finder.stddev" /></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.avg" /></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.min" /></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.max" /></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.stddev" /></th>
 	</tr>
+	
 	<tr>
-		<td><jstl:out value="${statsResultsFinders[0][0]}" /></td>
-		<td><jstl:out value="${statsResultsFinders[0][1]}" /></td>
-		<td><jstl:out value="${statsResultsFinders[0][2]}" /></td>
-		<td><jstl:out value="${statsResultsFinders[0][3]}" /></td>
+		<td><div style="text-align:center"><jstl:out value="${statsResultsFinders[0][0]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${statsResultsFinders[0][1]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${statsResultsFinders[0][2]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${statsResultsFinders[0][3]}" /></div></td>
 	</tr>
 </table>
 
 <table>
 	<tr>
-		<th><spring:message code="stats.finder.empty" /></th>
-		<th><spring:message code="stats.finder.nonEmpty" /></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.empty" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.nonEmpty" /></div></th>
 	</tr>
 	<tr>
-			<td><jstl:out value="${emptyVsNonEmptyFindersRatio[0][0]}" /></td>
-		<td><jstl:out value="${emptyVsNonEmptyFindersRatio[0][1]}" /></td>
+			<td><div style="text-align:center"><jstl:out value="${emptyVsNonEmptyFindersRatio[0][0]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${emptyVsNonEmptyFindersRatio[0][1]}" /></div></td>
 	</tr>
 </table>
 
+<br />
+<h4><spring:message code="stats.audit.position" />:</h4> 
+<table>
+	<tr>
+		<th><div style="text-align:center"><spring:message code="stats.position" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.avg" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.min" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.max" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.stddev" /></div></th>
+	</tr>
+	<jstl:forEach items="${statsAuditScorePerPosition}" var="x">
+	<tr>
+		<td><div style="text-align:center"><jstl:out value="${x[0]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${x[1]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${x[2]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${x[3]}" /></div></td>
+		<jstl:if test="${x[4] eq null}">
+		<td><div style="text-align:center">-</div></td>
+		</jstl:if>
+		<jstl:if test="${x[4] > -1}">
+		<td><div style="text-align:center"><jstl:out value="${x[4]}" /></div></td>
+		</jstl:if>
+	</tr>
+	</jstl:forEach>
+	
+</table>
+
+<br />
+<h4><spring:message code="stats.audit.company" />:</h4> 
+<table>
+	<tr>
+		<th><div style="text-align:center"><spring:message code="stats.company" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.avg" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.min" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.max" /></div></th>
+		<th><div style="text-align:center"><spring:message code="stats.finder.stddev" /></div></th>
+	</tr>
+	<jstl:forEach items="${statsAuditScorePerCompany}" var="x">
+	<tr>
+		<td><div style="text-align:center"><jstl:out value="${x[0]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${x[1]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${x[2]}" /></div></td>
+		<td><div style="text-align:center"><jstl:out value="${x[3]}" /></div></td>
+		<jstl:if test="${x[4] eq null}">
+		<td><div style="text-align:center">-</div></td>
+		</jstl:if>
+		<jstl:if test="${x[4] > -1}">
+		<td><div style="text-align:center"><jstl:out value="${x[4]}" /></div></td>
+		</jstl:if>
+	</tr>
+	</jstl:forEach>
+</table>
+<br />
+<h3>
+<spring:message code="stats.companiesWithHighestAuditScore" /> :
+</h3>
+<ul>
+	<jstl:forEach items="${companiesWithHighestAuditScore}" var="x">
+		<li><jstl:out value="${x.commercialName}" /></li>
+	</jstl:forEach>
+</ul>
+<br />
+
+<h3>
+<spring:message code="stats.avg.salary.highest.positions" /> :
+<jstl:out value="${avgSalaryHighestPositions}" />
+</h3>
+
+<h3>
+<spring:message code="stats.item.provider" /> :
+</h3>
+<spring:message code="stats.item.provider.average" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][0]}" />
+<br />
+<spring:message code="stats.item.provider.min" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][1]}" />
+<br />
+<spring:message code="stats.item.provider.max" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][2]}" />
+<br />
+<spring:message code="stats.item.provider.stddev" />
+:
+<jstl:out value="${statsNumberItemsPerProvider[0][3]}" />
+<br />
+
+<br />
+<h3>
+<spring:message code="stats.top5ProvidersPerItems" /> :
+</h3>
+<ul>
+	<jstl:forEach items="${top5ProvidersPerItems}" var="x">
+		<li><jstl:out value="${x.name} ${x.surnames} : ${fn:length(x.items)}" /></li>
+	</jstl:forEach>
+</ul>
+<br />
+
+<h3>
+<spring:message code="stats.SponsorshipsByProvider" /> :
+</h3>
+<spring:message code="stats.SponsorshipsByProvider.average" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][0]}" />
+<br />
+<spring:message code="stats.SponsorshipsByProvider.min" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][1]}" />
+<br />
+<spring:message code="stats.SponsorshipsByProvider.max" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][2]}" />
+<br />
+<spring:message code="stats.SponsorshipsByProvider.stddev" />
+:
+<jstl:out value="${statsSponsorshipsByProvider[0][3]}" />
+<br />
+
+<h3>
+<spring:message code="stats.SponsorshipsByPosition" /> :
+</h3>
+<spring:message code="stats.SponsorshipsByPosition.average" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][0]}" />
+<br />
+<spring:message code="stats.SponsorshipsByPosition.min" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][1]}" />
+<br />
+<spring:message code="stats.SponsorshipsByPosition.max" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][2]}" />
+<br />
+<spring:message code="stats.SponsorshipsByPosition.stddev" />
+:
+<jstl:out value="${statsSponsorshipsByPosition[0][3]}" />
+<br />
+
+<br />
+<h3>
+<spring:message code="stats.providersWithMoreThan10pcSponsorships" /> :
+</h3>
+<ul>
+	<jstl:forEach items="${providersWithMoreThan10pcSponsorships}" var="x">
+		<li><jstl:out value="${x.name} ${x.surnames}" /></li>
+	</jstl:forEach>
+</ul>
+<br />
 

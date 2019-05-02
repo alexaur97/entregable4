@@ -1,37 +1,44 @@
-package services; 
 
-import java.util.Collection; 
+package services;
 
-import org.springframework.beans.factory.annotation.Autowired; 
-import org.springframework.stereotype.Service; 
-import org.springframework.transaction.annotation.Transactional; 
-import org.springframework.util.Assert; 
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ItemRepository;
+import domain.Item;
+import domain.Provider;
 
-import domain.Item; 
-
-@Service 
-@Transactional 
-public class ItemService { 
+@Service
+@Transactional
+public class ItemService {
 
 	//Managed repository -------------------
 	@Autowired
-	private ItemRepository itemRepository;
+	private ItemRepository	itemRepository;
+
+	@Autowired
+	private ProviderService	providerService;
+
+	@Autowired
+	private Validator		validator;
 
 
 	//Supporting Services ------------------
 
-
 	//COnstructors -------------------------
-	public ItemService(){
+	public ItemService() {
 		super();
 	}
 
-
 	//Simple CRUD methods--------------------
 
-	public Item create(){
+	public Item create() {
 		Item result;
 
 		result = new Item();
@@ -39,32 +46,60 @@ public class ItemService {
 		return result;
 	}
 
-	public Collection<Item> findAll(){
+	public Collection<Item> findAll() {
 		Collection<Item> result;
 
-		result = itemRepository.findAll();
+		result = this.itemRepository.findAll();
 
 		return result;
 	}
 
-	public Item findOne(int itemId){
+	public Item findOne(final int itemId) {
 		Item result;
 
-		result = itemRepository.findOne(itemId);
+		result = this.itemRepository.findOne(itemId);
 
 		return result;
 	}
 
-	public void save(Item item){
+	public void save(final Item item) {
 		Assert.notNull(item);
 
-		itemRepository.save(item);
+		this.itemRepository.save(item);
 	}
 
-	public void delete(Item item){
-		itemRepository.delete(item);
+	public void delete(final Item item) {
+		final Provider p = this.providerService.findByPrincipal();
+		Assert.isTrue(item.getProvider().equals(p));
+		this.itemRepository.delete(item);
 	}
 
+	public Collection<Item> getItemsByProvider(final int providerId) {
+		Assert.notNull(providerId);
+		final Collection<Item> res = this.itemRepository.getItemsByProvider(providerId);
+		//		for (final Item i : res) {
+		//			final int id = i.getProvider().getId();
+		//			Assert.isTrue(id == providerId);
+		//	}
+		return res;
+	}
 
+	public Item reconstruct(final Item item, final BindingResult binding) {
+
+		final Item res = item;
+
+		final Provider p = this.providerService.findByPrincipal();
+		res.setProvider(p);
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
 	//Other Methods--------------------
-} 
+
+	public Collection<Double> statsNumberItemsPerProvider() {
+		final Collection<Double> result = this.itemRepository.statsNumberItemsPerProvider();
+		return result;
+	}
+
+}

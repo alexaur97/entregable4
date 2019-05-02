@@ -131,6 +131,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="provider2" />
+		<property name="password" value="ebfc815ee2cc6a16225105bb7b3e1e53" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PROVIDER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- CreditCards -->
 	<bean id="creditCard1" class="domain.CreditCard">
@@ -221,6 +233,15 @@
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="21" />
 		<property name="cvv" value="147" />
+	</bean>
+	
+	<bean id="creditCard11" class="domain.CreditCard">
+		<property name="holderName" value="Jose Mari León Reina" />
+		<property name="brandName" value="American Express" />
+		<property name="number" value="5275205444444030" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="21" />
+		<property name="cvv" value="148" />
 	</bean>
 	
 	<!-- Curriculums -->
@@ -824,6 +845,31 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="userAccount" ref="userAccount10" />
+		<property name="items">
+			<list>
+			<ref bean="item1"/>
+			</list>
+		</property>	
+		
+	</bean>
+	
+	<bean id="actor11" class="domain.Provider">
+		<property name="name" value="Jose Mari" />
+		<property name="surnames" value="León Reina" />
+		<property name="VAT" value="ESB57403180" />
+		<property name="creditCard" ref="creditCard11" />
+		<property name="photo"
+			value="" />
+		<property name="email" value="provider2@provider2.org" />
+		<property name="phone" value="67567569" />
+		<property name="address" value="" />
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="userAccount" ref="userAccount11" />
+		<property name="items">
+			<list>
+			</list>
+		</property>	
 	</bean>
 	
 	<!-- Finders -->
@@ -1426,6 +1472,22 @@
 		<property name="creditCard" ref="creditCard10" />
 		<property name="provider" ref="actor10" />
 		<property name="position" ref="position2" />
+	</bean>
+	
+	<bean id="sponsorship3" class="domain.Sponsorship">
+		<property name="banner" value="https://www.dhresource.com/0x0s/f2-albu-g6-M01-5F-ED-rBVaR1rELmmAFrviAAEdx_qBtaA195.jpg/papel-bunting-garland-banners-banderas-happy.jpg" />
+		<property name="targetPage" value="https://es.dhgate.com/product/paper-bunting-garland-banners-flags-happy/411193412.html" />
+		<property name="creditCard" ref="creditCard11" />
+		<property name="provider" ref="actor11" />
+		<property name="position" ref="position1" />
+	</bean>
+	
+	<bean id="sponsorship4" class="domain.Sponsorship">
+		<property name="banner" value="https://about.canva.com/es_es/wp-content/uploads/sites/3/2015/02/Etsy-Banners.png" />
+		<property name="targetPage" value="https://www.canva.com/es_es/crear/banners/banners-etsy/" />
+		<property name="creditCard" ref="creditCard10" />
+		<property name="provider" ref="actor10" />
+		<property name="position" ref="position1" />
 	</bean>
 	
 	<!-- Audits -->

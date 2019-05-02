@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AuditorService;
 import services.PositionService;
+import controllers.AbstractController;
 import domain.Auditor;
 import domain.Position;
 
 @Controller
 @RequestMapping("auditor/auditor")
-public class AuditorAuditorController {
+public class AuditorAuditorController extends AbstractController {
 
 	@Autowired
 	private PositionService	positionService;
@@ -34,7 +36,7 @@ public class AuditorAuditorController {
 
 			final Auditor auditor = this.auditorService.findByPrincipal();
 
-			final Collection<Position> position = this.positionService.findPositionsFinal();
+			final Collection<Position> position = this.positionService.findPositionsRequisitos();
 			res = new ModelAndView("auditor/editPos");
 			res.addObject("auditor", auditor);
 			res.addObject("position", position);
@@ -48,27 +50,35 @@ public class AuditorAuditorController {
 	@RequestMapping(value = "/editPosition", method = RequestMethod.POST, params = "save")
 	public ModelAndView savePos(@ModelAttribute("auditor") Auditor auditor, final BindingResult binding) {
 		ModelAndView res;
+		final Collection<Position> pos = this.positionService.findPositionsRequisitos();
 
-		auditor = this.auditorService.reconstruct(auditor, binding);
-		final Collection<Position> pos = this.positionService.findPositionsFinal();
+		try {
+			Assert.notNull(auditor.getPositions());
 
-		if (binding.hasErrors()) {
-			res = new ModelAndView("auditor/editPos");
-			res.addObject("auditor", auditor);
-			res.addObject("position", pos);
-		} else
-			try {
+			auditor = this.auditorService.reconstruct(auditor, binding);
 
-				this.auditorService.save(auditor);
-				res = new ModelAndView("redirect:/audit/auditor/myList.do");
-
-			} catch (final Throwable oops) {
+			if (binding.hasErrors()) {
 				res = new ModelAndView("auditor/editPos");
 				res.addObject("auditor", auditor);
 				res.addObject("position", pos);
-				res.addObject("auditor.commit.error");
-			}
+			} else
+				try {
 
+					this.auditorService.save(auditor);
+					res = new ModelAndView("redirect:/position/list.do");
+
+				} catch (final Throwable oops) {
+					res = new ModelAndView("auditor/editPos");
+					res.addObject("auditor", auditor);
+					res.addObject("position", pos);
+					res.addObject("message", "auditor.commit.error");
+				}
+		} catch (final Throwable oops) {
+			res = new ModelAndView("auditor/editPos");
+			res.addObject("auditor", auditor);
+			res.addObject("position", pos);
+			res.addObject("message", "auditor.error.noPositions");
+		}
 		return res;
 	}
 

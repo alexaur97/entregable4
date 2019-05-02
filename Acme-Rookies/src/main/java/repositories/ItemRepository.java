@@ -1,15 +1,22 @@
+
 package repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository; 
-import org.springframework.data.jpa.repository.Query; 
-import org.springframework.stereotype.Repository; 
+import java.util.Collection;
 
-import domain.Item; 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-@Repository 
-public interface ItemRepository extends JpaRepository<Item, Integer>{ 
+import domain.Item;
 
-	//@Query("") 
+@Repository
+public interface ItemRepository extends JpaRepository<Item, Integer> {
+
+	@Query("select i from Item i where i.provider.id=?1")
+	Collection<Item> getItemsByProvider(int providerId);
 	//Method 
 
-} 
+	@Query("select avg(1.0*(select count(i) from Item i where i.provider.id = p.id)),min(1.0*(select count(i) from Item i where i.provider.id = p.id)),max(1.0*(select count(i) from Item i where i.provider.id = p.id)),stddev(1.0*(select count(i) from Item i where i.provider.id = p.id)) from Provider p")
+	Collection<Double> statsNumberItemsPerProvider();
+
+}

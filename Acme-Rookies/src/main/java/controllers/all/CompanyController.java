@@ -21,16 +21,16 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import security.LoginService;
 import services.ActorService;
-import services.AuditService;
 import services.CompanyService;
 import services.PositionService;
+import controllers.AbstractController;
 import domain.Company;
 import domain.Position;
 import forms.CompanyRegisterForm;
 
 @Controller
 @RequestMapping("/company")
-public class CompanyController {
+public class CompanyController extends AbstractController {
 
 	@Autowired
 	private CompanyService	companyService;
@@ -40,9 +40,6 @@ public class CompanyController {
 
 	@Autowired
 	private ActorService	actorService;
-
-	@Autowired
-	private AuditService	auditService;
 
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -121,7 +118,8 @@ public class CompanyController {
 			}
 			final Boolean b = positions.isEmpty();
 			result = new ModelAndView("company/show");
-
+			final Double score = this.companyService.scoreByCompany(company);
+			result.addObject("score", score);
 			result.addObject("positions", positions);
 			result.addObject("company", company);
 			result.addObject("b", b);

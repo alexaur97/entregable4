@@ -76,11 +76,11 @@ public class Authority implements GrantedAuthority {
 		authority = new Authority();
 		authority.setAuthority(Authority.ROOKIE);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(Authority.AUDITOR);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(Authority.PROVIDER);
 		result.add(authority);

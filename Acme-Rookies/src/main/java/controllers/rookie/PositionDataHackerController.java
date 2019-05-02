@@ -16,15 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CurriculumService;
-import services.RookieService;
 import services.PositionDataService;
+import services.RookieService;
+import controllers.AbstractController;
 import domain.Curriculum;
-import domain.Rookie;
 import domain.PositionData;
+import domain.Rookie;
 
 @Controller
 @RequestMapping("/positionData/rookie/")
-public class PositionDataHackerController {
+public class PositionDataHackerController extends AbstractController {
 
 	@Autowired
 	private PositionDataService	positionDataService;

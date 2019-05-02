@@ -16,12 +16,13 @@ import security.Authority;
 import security.LoginService;
 import services.PositionService;
 import services.SponsorshipService;
+import controllers.AbstractController;
 import domain.Position;
 import domain.Sponsorship;
 
 @Controller
 @RequestMapping("/position")
-public class PositionController {
+public class PositionController extends AbstractController {
 
 	@Autowired
 	private PositionService		positionService;
