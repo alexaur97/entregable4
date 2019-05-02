@@ -20,4 +20,12 @@
 		<put-attribute name="title" value=" Lista de patrocinios" />
 		<put-attribute name="body" value="/views/sponsorship/list.jsp" />
 	</definition>
+	<definition name="sponsorship/create" extends="master.page">	
+		<put-attribute name="title" value="Crear Patrocinio" />
+		<put-attribute name="body" value="/views/sponsorship/create.jsp" />
+	</definition>
+	<definition name="sponsorship/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar Patrocinio" />
+		<put-attribute name="body" value="/views/sponsorship/edit.jsp" />
+	</definition>
 </tiles-definitions>

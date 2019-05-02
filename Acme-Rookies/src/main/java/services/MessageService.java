@@ -205,14 +205,14 @@ public class MessageService {
 		final ConfigurationParameters a = this.configurationParametersService.find();
 		Assert.isTrue(a.getWelcomeNotify() == false);
 		final Message msn = new Message();
-		msn.setBody("This message is to notify that our web has been rebranded to Acme Rookies");
+		msn.setBody("This message is to notify that our web has been rebranded to Acme Rookies/Este mensaje es una notificación de que nuestra pagina web ha sido renombrada como Acme Rookies");
 		msn.setCopy(false);
 		msn.setDeleted(false);
 		msn.setMoment(new Date());
 		msn.setOwner(this.administratorService.findByPrincipal());
 		msn.setRecipient(this.administratorService.findByPrincipal());
 		msn.setSender(this.administratorService.findByPrincipal());
-		msn.setSubject("NOTIFICATION");
+		msn.setSubject("WELCOME TO ACME ROOKIES");
 		final Collection<String> tags = new ArrayList<>();
 		tags.add("SYSTEM");
 		msn.setTags(tags);

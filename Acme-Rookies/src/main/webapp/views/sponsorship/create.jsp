@@ -1,4 +1,3 @@
-
 <%--
  * list.jsp
  *
@@ -27,13 +26,23 @@
 		<div class="col-sm-12 col-md-12 col-lg-12">
 			<fieldset class="col-md-6 col-md-offset-3">
 				
-					<form:form action="application/rookie/create.do" modelAttribute="application"  class="form-horizontal" method="post">
+					<form:form action="sponsorship/provider/create.do" modelAttribute="sponsorshipForm"  class="form-horizontal" method="post">
 	<div class="form-group ">
-	<form:hidden path="id"/>
-						<form:hidden path="version"/>
-		<acme:select items="${positions}" itemLabel="title" code="application.positions" path="position"/>
-			<acme:select items="${curriculums}" itemLabel="idName" code="application.curriculums" path="curriculum"/>
 	
+								<acme:textbox code="sponsorship.banner" path="banner" />
+								<acme:textbox code="sponsorship.targetPage" path="targetPage" />
+						
+		<acme:select items="${positions}" itemLabel="title" code="application.positions" path="position"/>
+			<legend>
+			</br><spring:message code="company.creditCard" />
+		</legend>
+		<acme:textbox code="company.holderName" path="holderName" />
+		<acme:textbox code="company.brandName" path="brandName" />
+		<acme:textbox code="company.number" path="number" />
+		<acme:textbox code="company.expirationMonth" path="expirationMonth" />
+		<acme:textbox code="company.expirationYear" path="expirationYear" />
+		<acme:textbox code="company.cvv" path="cvv" />
+	</fieldset>
 	<acme:submit name="save" code="application.save"/>
 	<acme:cancel url="#" code="application.cancel"/>
 

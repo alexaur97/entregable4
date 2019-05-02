@@ -1,4 +1,3 @@
-
 <%--
  * list.jsp
  *
@@ -27,13 +26,15 @@
 		<div class="col-sm-12 col-md-12 col-lg-12">
 			<fieldset class="col-md-6 col-md-offset-3">
 				
-					<form:form action="application/rookie/create.do" modelAttribute="application"  class="form-horizontal" method="post">
+					<form:form action="sponsorship/provider/edit.do" modelAttribute="sponsorship"  class="form-horizontal" method="post">
 	<div class="form-group ">
 	<form:hidden path="id"/>
 						<form:hidden path="version"/>
+								<acme:textbox code="sponsorship.banner" path="banner" />
+								<acme:textbox code="sponsorship.targetPage" path="targetPage" />
+						
 		<acme:select items="${positions}" itemLabel="title" code="application.positions" path="position"/>
-			<acme:select items="${curriculums}" itemLabel="idName" code="application.curriculums" path="curriculum"/>
-	
+	</fieldset>
 	<acme:submit name="save" code="application.save"/>
 	<acme:cancel url="#" code="application.cancel"/>
 
