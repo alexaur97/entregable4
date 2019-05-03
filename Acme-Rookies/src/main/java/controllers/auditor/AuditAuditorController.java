@@ -35,7 +35,7 @@ public class AuditAuditorController extends AbstractController {
 		ModelAndView result;
 		try {
 			this.auditorService.findByPrincipal();
-			final Collection<Audit> audits = this.auditService.findByPrincipal();
+			final Collection<Audit> audits = this.auditService.findByAuditor();
 
 			result = new ModelAndView("audit/myList");
 			result.addObject("requestURI", "audit/auditor/myList.do");
@@ -75,7 +75,7 @@ public class AuditAuditorController extends AbstractController {
 			final Audit audit = this.auditService.findOne(auditId);
 			Assert.notNull(audit);
 
-			final Collection<Audit> audits = this.auditService.findByPrincipal();
+			final Collection<Audit> audits = this.auditService.findByAuditor();
 			Assert.isTrue(audits.contains(audit));
 			res = this.createEditModelAndView(audit);
 
@@ -122,7 +122,7 @@ public class AuditAuditorController extends AbstractController {
 			final Audit auditDB = this.auditService.findOne(audit.getId());
 			Assert.notNull(auditDB);
 
-			final Collection<Audit> audits = this.auditService.findByPrincipal();
+			final Collection<Audit> audits = this.auditService.findByAuditor();
 			Assert.isTrue(audits.contains(auditDB));
 			this.auditService.delete(au);
 			result = new ModelAndView("redirect:/audit/auditor/myList.do");
@@ -148,7 +148,7 @@ public class AuditAuditorController extends AbstractController {
 			final Audit audit = this.auditService.findOne(auditId);
 			Assert.notNull(audit);
 
-			final Collection<Audit> audits = this.auditService.findByPrincipal();
+			final Collection<Audit> audits = this.auditService.findByAuditor();
 			Assert.isTrue(audits.contains(audit));
 			res = new ModelAndView("audit/show");
 			res.addObject("audit", audit);
