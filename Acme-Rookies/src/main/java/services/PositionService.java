@@ -350,6 +350,9 @@ public class PositionService {
 	public Double avgSalaryHighestPositions() {
 		final Double result = this.positionRepository.avgSalaryHighestPositions();
 		return result;
+
+	}
+
 	public Collection<Position> findPositionsRequisitos() {
 		final Collection<Position> pos = this.positionRepository.findPositionsReq();
 		final Auditor auditor = this.auditorService.findByPrincipal();
