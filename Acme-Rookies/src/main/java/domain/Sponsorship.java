@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
@@ -32,7 +33,7 @@ public class Sponsorship extends DomainEntity {
 	public void setCreditCard(final CreditCard creditCard) {
 		this.creditCard = creditCard;
 	}
-
+	@NotBlank
 	@URL
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBanner() {
@@ -41,7 +42,7 @@ public class Sponsorship extends DomainEntity {
 	public void setBanner(final String banner) {
 		this.banner = banner;
 	}
-
+	@NotBlank
 	@URL
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTargetPage() {

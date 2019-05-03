@@ -32,6 +32,7 @@ public class SponsorshipForm {
 	private Integer		cvv;
 
 
+	@NotBlank
 	@URL
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBanner() {
@@ -40,7 +41,7 @@ public class SponsorshipForm {
 	public void setBanner(final String banner) {
 		this.banner = banner;
 	}
-
+	@NotBlank
 	@URL
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTargetPage() {
