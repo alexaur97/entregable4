@@ -31,7 +31,7 @@
 	<acme:textbox code="actor.phone" path="phone" />
 	<acme:textbox code="actor.address" path="address" />
 	<br />
-	<security:authorize access="hasAnyRole('ROOKIE','COMPANY')">
+	<security:authorize access="hasAnyRole('ROOKIE','COMPANY','AUDITOR','PROVIDER')">
 	<jstl:choose>
 		<jstl:when test="${lang eq 'en'}">
 			<button type="submit" onclick="return validatePhoneNumber()" name="save">
