@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AuditService;
 import services.CompanyService;
 import services.PositionService;
 import services.ProblemService;
 import controllers.AbstractController;
+import domain.Audit;
 import domain.Company;
 import domain.Position;
 import domain.Problem;
@@ -36,6 +38,9 @@ public class PositionCompanyController extends AbstractController {
 
 	@Autowired
 	private PositionService	positionService;
+
+	@Autowired
+	private AuditService	auditService;
 
 
 	@RequestMapping(value = "/myList", method = RequestMethod.GET)
@@ -224,9 +229,17 @@ public class PositionCompanyController extends AbstractController {
 			if (mode.equals("DRAFT"))
 				Assert.isTrue(position.getCompany().equals(company));
 			final Boolean b = position.getProblems().isEmpty();
+
+			Boolean d = true;
+			final Collection<Audit> audit = this.auditService.findByPosition(positionId);
+			if (audit.isEmpty())
+				d = false;
+
 			result = new ModelAndView("position/show");
 			result.addObject("position", position);
 			result.addObject("b", b);
+			result.addObject("d", d);
+			result.addObject("audit", audit);
 
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/#");

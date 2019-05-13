@@ -116,6 +116,14 @@
 								code="master.page.companyListScore" /></a></li>
 		            </security:authorize>
 
+
+					<security:authorize access= "hasRole('AUDITOR')">
+					<li><a href="position/auditor/myList.do"><spring:message
+								code="master.page.positionList" /></a></li>
+
+					</security:authorize>
+					
+					
 					<security:authorize access="hasRole('ROOKIE')">
 						<li><a href="curriculum/rookie/list.do"><spring:message
 									code="master.page.curriculum" /> </a></li>

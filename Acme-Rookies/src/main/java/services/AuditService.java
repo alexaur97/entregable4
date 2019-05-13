@@ -87,6 +87,7 @@ public class AuditService {
 
 	public Audit reconstruct(final Audit audit, final BindingResult binding) {
 		final Audit res = audit;
+
 		final Auditor auditor = this.auditorService.findByPrincipal();
 		res.setAuditor(auditor);
 		final Date date = new Date();

@@ -33,15 +33,29 @@
 		property="ticker" />
 		<display:column titleKey="position.mode"
 		property="mode" />
-		
+	
+	<security:authorize access="hasRole('COMPANY')">
 	<display:column titleKey="position.showPosition">
 		<acme:cancel url="/position/company/show.do?positionId=${position.id}"
 			code="position.show" />
 	</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('AUDITOR')">
+	<display:column titleKey="position.showPosition">
+		<acme:cancel url="/position/auditor/show.do?positionId=${position.id}"
+			code="position.show" />
+	</display:column>
+	</security:authorize>
+	
+	
 	<display:column titleKey="position.company">
 		<acme:cancel url="/company/show.do?companyId=${position.company.id}"
 			code="position.company" />
 	</display:column>
+	
+	
+		<security:authorize access="hasRole('COMPANY')">
 	
 	<display:column titleKey="position.edit">
 		<jstl:if test="${position.mode=='DRAFT'}">
@@ -66,11 +80,13 @@
 		</jstl:if>
 	</display:column>
 
+</security:authorize>
 </display:table>
 
 
 <br>
 <br>
+<security:authorize access="hasRole('COMPANY')">
 <h3>
 <spring:message code = "position.cancelled"/>
 </h3>
@@ -93,7 +109,7 @@
 			code="position.company" />
 	</display:column>
 </display:table>
-
+</security:authorize>
 <br>
 <br>
 <br>

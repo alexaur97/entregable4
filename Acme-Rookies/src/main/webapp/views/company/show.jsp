@@ -99,7 +99,7 @@
 	</ul>
 </jstl:if>
 <br />
-<acme:button url="/company/list.do" code="company.back"/>
+
 
 
 

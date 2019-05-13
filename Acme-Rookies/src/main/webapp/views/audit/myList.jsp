@@ -30,6 +30,8 @@
 	<display:column titleKey="audit.moment" property="moment" />
 	<display:column titleKey="audit.score" property="score" />
 	<display:column titleKey="audit.mode" property="mode" />
+	<display:column titleKey="audit.moment" property="moment" />
+	
 	
 	<display:column titleKey="audit.edit">
 	<jstl:if test="${audit.mode eq 'DRAFT'}">
