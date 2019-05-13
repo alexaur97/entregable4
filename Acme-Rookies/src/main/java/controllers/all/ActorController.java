@@ -15,12 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdministratorService;
+import services.AuditorService;
 import services.CompanyService;
 import services.ProviderService;
 import services.RookieService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Administrator;
+import domain.Auditor;
 import domain.Company;
 import domain.Provider;
 import domain.Rookie;
@@ -41,6 +43,8 @@ public class ActorController extends AbstractController {
 	private AdministratorService	administratorService;
 	@Autowired
 	private ProviderService			providerService;
+	@Autowired
+	private AuditorService			auditorService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -111,6 +115,10 @@ public class ActorController extends AbstractController {
 				} else if (this.actorService.authEdit(actor, "PROVIDER")) {
 					final Provider provider = this.providerService.reconstructEdit(actorEditForm);
 					this.providerService.save(provider);
+
+				} else if (this.actorService.authEdit(actor, "AUDITOR")) {
+					final Auditor auditor = this.auditorService.reconstructEdit(actorEditForm);
+					this.auditorService.save(auditor);
 				}
 				res = new ModelAndView("redirect:/#");
 			} catch (final Throwable oops) {

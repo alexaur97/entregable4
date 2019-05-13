@@ -100,8 +100,8 @@
 									code="master.page.editProfile" /></a></li>
 					</security:authorize>
 					
-					
-					<security:authorize access="hasAnyRole('ROOKIE','COMPANY', 'PROVIDER')">
+
+					<security:authorize access="hasAnyRole('ROOKIE','COMPANY','PROVIDER','AUDITOR')">
 						<li><a href="actor/edit.do"><spring:message
 									code="master.page.editProfile" /></a></li>
 					</security:authorize>

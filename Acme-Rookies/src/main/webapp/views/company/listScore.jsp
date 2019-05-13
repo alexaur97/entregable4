@@ -24,12 +24,14 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jstl:if test="${end>=0}">
 <table>
 	<tr>
 		<th><spring:message code="company.commercialName" /></th>
 		<th><spring:message code="company.score" /></th>
 		
 	</tr>
+	
 	<jstl:forEach  var="x" begin="0" end="${end}">
 		<tr>
 				<td><jstl:out value="${companies[x].commercialName}" /></td>
@@ -46,5 +48,9 @@
 			</jstl:choose>
 		</tr>
 	</jstl:forEach>
-
+	
 </table>
+</jstl:if>
+<jstl:if test="${end<0}">
+	<spring:message code="company.list.nothingToShow" />
+	</jstl:if>
