@@ -54,6 +54,20 @@
 </jstl:if>
 <br/>
 
+<jstl:if test="${d eq false}">
+<h2><spring:message code="position.noaudits"/></h2>
+</jstl:if>
+<jstl:if test="${d eq true}">
+<h2><spring:message code="position.audits"/>:</h2>
+<ul>
+	<jstl:forEach items="${audit}" var="x">
+		<li><a href="audit/display.do?auditId=${x.id}"><jstl:out value="${x.text}" /></a></li>
+	</jstl:forEach>
+</ul>
+</jstl:if>
+<br/>
+
+
 <jstl:if test="${position.cancelled eq true}">
 <h3 style="color: #DD8833;"><spring:message code="position.cancele"/></h3>
 </jstl:if>

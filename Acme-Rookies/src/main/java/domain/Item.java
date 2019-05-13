@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -7,7 +8,6 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -23,53 +23,52 @@ public class Item extends DomainEntity {
 	private String				description;
 	private Collection<String>	links;
 	private Collection<String>	photos;
-	
-	private Provider provider;
-	
+
+	private Provider			provider;
+
+
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
-		return name;
+		return this.name;
 	}
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
-	
+
 	@ElementCollection
 	@NotEmpty
 	public Collection<String> getLinks() {
-		return links;
+		return this.links;
 	}
-	public void setLinks(Collection<String> links) {
+	public void setLinks(final Collection<String> links) {
 		this.links = links;
 	}
-	
+
 	@ElementCollection
 	public Collection<String> getPhotos() {
-		return photos;
+		return this.photos;
 	}
-	public void setPhotos(Collection<String> photos) {
+	public void setPhotos(final Collection<String> photos) {
 		this.photos = photos;
 	}
-	
+
 	@NotNull
-	@Valid
 	@ManyToOne(optional = false)
 	public Provider getProvider() {
-		return provider;
+		return this.provider;
 	}
-	public void setProvider(Provider provider) {
+	public void setProvider(final Provider provider) {
 		this.provider = provider;
 	}
-
 
 }

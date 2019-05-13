@@ -18,6 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.CreditCard;
 import domain.Provider;
+import forms.ActorEditForm;
 import forms.ProviderRegisterForm;
 
 @Service
@@ -160,5 +161,19 @@ public class ProviderService {
 		final String vat = providerRegisterForm.getVAT();
 		result.setVAT(vat.toUpperCase());
 		return result;
+	}
+
+	public Provider reconstructEdit(final ActorEditForm actorEditForm) {
+		final Provider res;
+		res = this.findByPrincipal();
+		res.setName(actorEditForm.getName());
+		res.setVAT(actorEditForm.getVAT());
+		res.setSurnames(actorEditForm.getSurnames());
+		res.setPhoto(actorEditForm.getPhoto());
+		res.setEmail(actorEditForm.getEmail());
+		res.setPhone(this.actorService.addCountryCode(actorEditForm.getPhone()));
+		res.setAddress(actorEditForm.getAddress());
+		Assert.notNull(res);
+		return res;
 	}
 }

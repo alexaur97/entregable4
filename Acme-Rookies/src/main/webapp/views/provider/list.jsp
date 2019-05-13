@@ -27,6 +27,8 @@
 <display:table pagesize="5" name="providers" id="provider"
 	requestURI="${requestURI}" class="displaytag table">
 	<display:column titleKey="provider.name"  property="name" />
+	<display:column titleKey="provider.surnames"  property="surnames" />
+	
 	
  	<display:column titleKey="provider.items">
 		<acme:cancel url="/item/listByProvider.do?providerId=${provider.id}" code="provider.items" />

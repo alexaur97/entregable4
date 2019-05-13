@@ -36,5 +36,7 @@ public class CreditCardService {
 		final CreditCard result = this.creditCardRepository.save(creditCard);
 		return result;
 	}
-
+	public void delete(final CreditCard creditCard) {
+		this.creditCardRepository.delete(creditCard);
+	}
 }

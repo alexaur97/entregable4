@@ -21,6 +21,7 @@ import security.UserAccount;
 import domain.Auditor;
 import domain.CreditCard;
 import domain.Position;
+import forms.ActorEditForm;
 import forms.AuditorRegisterForm;
 
 @Service
@@ -39,7 +40,6 @@ public class AuditorService {
 
 	@Autowired
 	private Validator				validator;
-
 
 
 	//Supporting Services ------------------
@@ -190,6 +190,20 @@ public class AuditorService {
 		final String vat = auditorRegisterForm.getVAT();
 		result.setVAT(vat.toUpperCase());
 		return result;
+	}
+
+	public Auditor reconstructEdit(final ActorEditForm actorEditForm) {
+		final Auditor res;
+		res = this.findByPrincipal();
+		res.setName(actorEditForm.getName());
+		res.setVAT(actorEditForm.getVAT());
+		res.setSurnames(actorEditForm.getSurnames());
+		res.setPhoto(actorEditForm.getPhoto());
+		res.setEmail(actorEditForm.getEmail());
+		res.setPhone(this.actorService.addCountryCode(actorEditForm.getPhone()));
+		res.setAddress(actorEditForm.getAddress());
+		Assert.notNull(res);
+		return res;
 	}
 
 	//Other Methods--------------------

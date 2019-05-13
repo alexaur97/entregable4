@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import services.ActorService;
+import services.AdministratorService;
 import services.MessageService;
 import utilities.AbstractTest;
 import domain.Actor;
@@ -27,10 +28,12 @@ import domain.Message;
 public class MessageServiceTest extends AbstractTest {
 
 	@Autowired
-	private MessageService	messageService;
+	private MessageService			messageService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	//Este test testea el requisito 23.2 Un Actor autenticado puede enviar un mensaje a otro
@@ -146,5 +149,60 @@ public class MessageServiceTest extends AbstractTest {
 			this.messageService.delete(me);
 
 		super.unauthenticate();
+	}
+	//Este test testea el requisito 4.1 Un Actor autenticado como Administrador puede enviar solo una notificacion de aviso de renombnramiento de la web
+
+	// Análisis del sentence coverage (Pasos que sigue el test en nuestro código): 
+	// 1. El cliente se loguea como Admin
+	// 2. Selecciona notify en la pestaña de mensajes
+	// Análisis del data coverage (¿Que y como estamos verificando en nuestro modelo de datos?):
+
+	// Estamos verificando en nuestro modelo de datos que un usuario puede
+	// enviar una notificacion
+	@Test
+	public void testNotifyGood() {
+		super.authenticate("admin");
+		final int adminId = this.administratorService.findByPrincipal().getId();
+		final Collection<Actor> actors = this.actorService.findOthersActors(adminId);
+		final Message messageF = this.messageService.notifyWelcome();
+
+		for (final Actor actor : actors) {
+			final Message m = this.messageService.reconstructAdmnistrator2(messageF, actor, null);
+			this.messageService.save(m);
+			final Message mCopy = this.messageService.reconstructAdmnistrator2Copy(messageF, actor, null);
+			this.messageService.save(mCopy);
+		}
+
+	}
+	// Para el caso negativo estamos intentando que un actor envíe esta notificación dos veces.
+	//  Esto debe provocar un fallo
+	// en el sistema porque solo se puede enviar una vez la notificación.
+	// Análisis del sentence coverage (Pasos que sigue el test en nuestro código): 
+	// 1. El cliente se loguea como administrador
+	// 2. Selecciona enviar notificacion en la pestaña de mensajes
+	// Análisis del data coverage (¿Que y como estamos verificando en nuestro modelo de datos?):
+
+	// Estamos verificando en nuestro sistema que no se puede enviar mas de una notificacion
+	@Test(expected = IllegalArgumentException.class)
+	public void testNotifyError() {
+		super.authenticate("admin");
+		final int adminId = this.administratorService.findByPrincipal().getId();
+		final Collection<Actor> actors = this.actorService.findOthersActors(adminId);
+		final Message messageF = this.messageService.notifyWelcome();
+
+		for (final Actor actor : actors) {
+			final Message m = this.messageService.reconstructAdmnistrator2(messageF, actor, null);
+			this.messageService.save(m);
+			final Message mCopy = this.messageService.reconstructAdmnistrator2Copy(messageF, actor, null);
+			this.messageService.save(mCopy);
+		}
+		final Message messageF2 = this.messageService.notifyWelcome();
+
+		for (final Actor actor : actors) {
+			final Message m = this.messageService.reconstructAdmnistrator2(messageF2, actor, null);
+			this.messageService.save(m);
+			final Message mCopy = this.messageService.reconstructAdmnistrator2Copy(messageF2, actor, null);
+			this.messageService.save(mCopy);
+		}
 	}
 }

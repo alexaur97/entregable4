@@ -181,12 +181,11 @@ public class PositionCompanyController extends AbstractController {
 		final Position pos = this.positionService.findOne(position.getId());
 		try {
 
-			Assert.isTrue(pos.getMode().equals("DRAFT"));
 			this.positionService.delete(pos);
 			result = new ModelAndView("redirect:/position/company/myList.do");
 
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(pos, oops.getMessage());
+			result = this.createEditModelAndView(pos, "position.commit.error");
 
 			final String msg = oops.getMessage();
 			if (msg.equals("positioncannotDelete")) {

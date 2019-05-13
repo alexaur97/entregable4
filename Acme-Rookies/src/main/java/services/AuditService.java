@@ -79,7 +79,7 @@ public class AuditService {
 		this.auditRepository.delete(audit);
 	}
 
-	public Collection<Audit> findByPrincipal() {
+	public Collection<Audit> findByAuditor() {
 		final Auditor auditor = this.auditorService.findByPrincipal();
 		final Collection<Audit> res = this.auditRepository.findByPrincipal(auditor.getId());
 		return res;
@@ -96,7 +96,6 @@ public class AuditService {
 		return res;
 	}
 
-
 	//Other Methods--------------------
 
 	public Collection<Object> statsAuditScorePerPosition() {
@@ -107,5 +106,10 @@ public class AuditService {
 	public Collection<Object> statsAuditScorePerCompany() {
 		final Collection<Object> result = this.auditRepository.statsAuditScorePerCompany();
 		return result;
+	}
+
+	public Collection<Audit> findByPosition(final int positionId) {
+		final Collection<Audit> res = this.auditRepository.findByPosition(positionId);
+		return res;
 	}
 }

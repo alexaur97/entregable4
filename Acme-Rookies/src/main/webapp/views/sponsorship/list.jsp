@@ -35,10 +35,12 @@
 			code="application.show" />
 	</display:column>
 		<display:column titleKey="application.edit">
-			<jstl:if test="${app.status==p}">
 			<acme:button url="/sponsorship/provider/edit.do?sponsorshipId=${sponsorship.id}" code="application.edit" />
-		</jstl:if>
+	</display:column>
+	<display:column titleKey="sponsorship.delete">
+		<acme:button url="/sponsorship/provider/delete.do?sponsorshipId=${sponsorship.id}"
+			code="sponsorship.delete" />
 	</display:column>
 </display:table>
-<acme:button url="/application/rookie/create.do" code="sponsorship.create"/>
+<acme:button url="/sponsorship/provider/create.do" code="sponsorship.create"/>
 				

@@ -23,4 +23,7 @@ public interface AuditRepository extends JpaRepository<Audit, Integer> {
 	@Query("select c.commercialName, (select case when avg(1.0*(a.score)) = null then '-' else avg(1.0*(a.score)) end from Audit a where a.position.company.id = c.id and a.mode='FINAL' and a.position.mode = 'Final'),(select case when min(1.0*(a.score)) = null then '-' else min(1.0*(a.score)) end from Audit a where a.position.company.id = c.id and a.mode='FINAL' and a.position.mode = 'Final'),(select case when max(1.0*(a.score)) = null then '-' else max(1.0*(a.score)) end from Audit a where a.position.company.id = c.id and a.mode='FINAL' and a.position.mode = 'Final'),(select stddev(1.0*(a.score))from Audit a where a.position.company.id = c.id and a.mode='FINAL' and a.position.mode = 'Final') from Company c")
 	Collection<Object> statsAuditScorePerCompany();
 
+	@Query("select a from Audit a  where a.position.id=?1")
+	Collection<Audit> findByPosition(int positionId);
+
 }
