@@ -12,6 +12,7 @@ import org.springframework.validation.Validator;
 
 import repositories.SponsorshipRepository;
 import domain.CreditCard;
+import domain.Provider;
 import domain.Sponsorship;
 import forms.SponsorshipForm;
 
@@ -28,6 +29,8 @@ public class SponsorshipService {
 	private CreditCardService		creditCardService;
 	@Autowired
 	private Validator				validator;
+	@Autowired
+	ProviderService					providerService;
 
 
 	//Supporting Services ------------------
@@ -70,6 +73,8 @@ public class SponsorshipService {
 	}
 
 	public void delete(final Sponsorship sponsorship) {
+		final Provider provider = this.providerService.findByPrincipal();
+		Assert.isTrue(sponsorship.getProvider().equals(provider));
 		this.sponsorshipRepository.delete(sponsorship);
 	}
 
