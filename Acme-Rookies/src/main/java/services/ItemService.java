@@ -64,6 +64,8 @@ public class ItemService {
 
 	public void save(final Item item) {
 		Assert.notNull(item);
+		final Provider provider = this.providerService.findByPrincipal();
+		Assert.isTrue(item.getProvider().equals(provider));
 
 		this.itemRepository.save(item);
 	}
@@ -89,6 +91,7 @@ public class ItemService {
 		final Item res = item;
 
 		final Provider p = this.providerService.findByPrincipal();
+		Assert.isTrue(item.getProvider().equals(p));
 		res.setProvider(p);
 
 		this.validator.validate(res, binding);
