@@ -14,6 +14,11 @@
 		<put-attribute name="body" value="/views/item/list.jsp" />
 	</definition>
 	
+		<definition name="item/mylist" extends="master.page">
+		<put-attribute name="title" value="Artefactos" />
+		<put-attribute name="body" value="/views/item/mylist.jsp" />
+	</definition>
+	
 	<definition name="item/edit" extends="master.page">
 		<put-attribute name="title" value="Editar Artefactos" />
 		<put-attribute name="body" value="/views/item/edit.jsp" />

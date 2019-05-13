@@ -33,9 +33,18 @@
 			<display:column titleKey="item.provider">
 		<acme:cancel url="/provider/showByItem.do?itemId=${item.id}" code="item.provider" />
 	</display:column>
+	
+	<security:authorize access="hasRole('PROVIDER')">
+		<display:column titleKey="item.show">
+		<acme:cancel url="/item/provider/show.do?itemId=${item.id}" code="item.show" />
+	</display:column>
+	</security:authorize>
 
 </display:table>
 
+<security:authorize access="hasRole('PROVIDER')">
+	<acme:cancel url="/item/provider/create.do" code="item.create" />
+</security:authorize>
 
 <br>
 <br>

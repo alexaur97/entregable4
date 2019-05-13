@@ -44,7 +44,7 @@ public class ItemProviderController extends AbstractController {
 			final Provider p = this.providerService.findByPrincipal();
 			final int providerId = p.getId();
 			items = this.itemService.getItemsByProvider(providerId);
-			result = new ModelAndView("item/list");
+			result = new ModelAndView("item/mylist");
 			result.addObject("requestURI", "item/list.do");
 			result.addObject("items", items);
 
@@ -142,9 +142,11 @@ public class ItemProviderController extends AbstractController {
 		ModelAndView result;
 		try {
 			Assert.notNull(itemId);
+			final Provider p = this.providerService.findByPrincipal();
 			//			final Company company = this.companyService.findByPrincipal();
 			final Item item = this.itemService.findOne(itemId);
 			Assert.notNull(item);
+			Assert.isTrue(item.getProvider().equals(p));
 			//			Assert.isTrue(problem.getCompany().equals(company));
 			result = new ModelAndView("item/show");
 			result.addObject("item", item);

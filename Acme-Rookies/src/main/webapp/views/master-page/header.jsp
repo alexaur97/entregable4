@@ -72,12 +72,8 @@
 			<li><a class="fNiv" href="problem/company/list.do"><spring:message
 						code="master.page.company.list" /></a></li>
 		</security:authorize>
-		
-			<security:authorize access="hasRole('PROVIDER')">
-			<li><a class="fNiv" href="item/provider/list.do"><spring:message
-						code="master.page.item.list" /></a></li>
-		</security:authorize>
 
+				
 
 <security:authorize access="hasRole('PROVIDER')">
 			<li><a class="fNiv" href="sponsorship/provider/list.do"><spring:message
@@ -103,11 +99,18 @@
 						<li><a href="actor/editAdm.do"><spring:message
 									code="master.page.editProfile" /></a></li>
 					</security:authorize>
-
-					<security:authorize access="hasAnyRole('ROOKIE','COMPANY')">
+					
+					
+					<security:authorize access="hasAnyRole('ROOKIE','COMPANY', 'PROVIDER')">
 						<li><a href="actor/edit.do"><spring:message
 									code="master.page.editProfile" /></a></li>
 					</security:authorize>
+					
+					<security:authorize access="hasRole('PROVIDER')">
+						<li><a href="item/provider/list.do"><spring:message
+									code="master.page.item.list" /></a></li>
+					</security:authorize>
+					
 					<security:authorize access="hasRole('ADMINISTRATOR')">
 
 					<li><a href="actor/administrator/list.do"><spring:message
@@ -132,6 +135,8 @@
 
 				</ul></li>
 		</security:authorize>
+		
+
 
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message
@@ -149,6 +154,7 @@
 					
 				</ul></li>
 		</security:authorize>
+		
 	</ul>
 </div>
 
