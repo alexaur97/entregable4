@@ -34,6 +34,10 @@
 		<acme:cancel url="/provider/showByItem.do?itemId=${item.id}" code="item.provider" />
 	</display:column>
 
+	<display:column titleKey="item.show">
+		<acme:cancel url="/item/provider/show.do?itemId=${item.id}" code="item.show" />
+	</display:column>
+
 </display:table>
 
 

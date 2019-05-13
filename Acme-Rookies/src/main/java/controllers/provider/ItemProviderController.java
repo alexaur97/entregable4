@@ -146,10 +146,12 @@ public class ItemProviderController extends AbstractController {
 			//			final Company company = this.companyService.findByPrincipal();
 			final Item item = this.itemService.findOne(itemId);
 			Assert.notNull(item);
-			Assert.isTrue(item.getProvider().equals(p));
+			final Boolean misItems = item.getProvider().equals(p);
+			// Assert.isTrue(misItems);
 			//			Assert.isTrue(problem.getCompany().equals(company));
 			result = new ModelAndView("item/show");
 			result.addObject("item", item);
+			result.addObject("misItems", misItems);
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/#");
 		}

@@ -1451,7 +1451,7 @@
 	<bean id="item1" class="domain.Item">
 		<property name="name" value="So so" />
 		<property name="description" value="5" />
-		<property name="links" value="https://trello.com/c/PH5bkJ9X/2-adaptar-el-proyecto-estimaci%C3%B3n-3-horas , https://trello.com/c/PH5bkJ9X/2-adaptar-el-proyecto" />
+		<property name="links" value="https://twitter.com/?lang=es" />
 		<property name="photos" value="" />
 		<property name="provider" ref="actor10" />
 	</bean>		

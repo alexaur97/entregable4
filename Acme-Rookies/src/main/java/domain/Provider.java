@@ -6,7 +6,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -15,7 +15,7 @@ public class Provider extends Actor {
 	private Collection<Item>	items;
 
 
-	@ManyToMany
+	@OneToMany(mappedBy = "provider")
 	public Collection<Item> getItems() {
 		return this.items;
 	}

@@ -38,7 +38,8 @@
 		<display:column titleKey="item.show">
 		<acme:cancel url="/item/provider/show.do?itemId=${item.id}" code="item.show" />
 	</display:column>
-	</security:authorize>
+	</security:authorize>		
+	
 
 </display:table>
 

@@ -41,5 +41,7 @@
 <br/>
 
 
+<jstl:if test="${misItems ne false}">
 <acme:button url="/item/provider/edit.do?itemId=${item.id}" code="item.edit"/>
+</jstl:if>
 
