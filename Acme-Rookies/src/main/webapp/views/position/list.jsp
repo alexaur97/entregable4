@@ -33,6 +33,7 @@
 		<acme:cancel url="/position/show.do?positionId=${position.id}"
 			code="position.show" />
 	</display:column>
+	
 	<display:column titleKey="position.company">
 		<acme:cancel url="/company/show.do?companyId=${position.company.id}"
 			code="position.company" />

@@ -75,6 +75,7 @@ public class AuditAuditorController extends AbstractController {
 			final Audit audit = this.auditService.findOne(auditId);
 			Assert.notNull(audit);
 
+			Assert.isTrue(audit.getMode().equals("DRAFT"));
 			final Collection<Audit> audits = this.auditService.findByAuditor();
 			Assert.isTrue(audits.contains(audit));
 			res = this.createEditModelAndView(audit);
@@ -107,7 +108,7 @@ public class AuditAuditorController extends AbstractController {
 				}
 		} catch (final Throwable oops) {
 
-			res = this.createEditModelAndView(audit, "audit.position.error");
+			res = this.createEditModelAndView(audit, "audit.commit.error");
 
 		}
 		return res;
