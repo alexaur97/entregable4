@@ -91,13 +91,26 @@ public class ItemService {
 		final Item res = item;
 
 		final Provider p = this.providerService.findByPrincipal();
-		Assert.isTrue(item.getProvider().equals(p));
-		res.setProvider(p);
 
+		if (res.getId() != 0)
+			Assert.isTrue(res.getProvider().equals(p));
+		res.setProvider(p);
 		this.validator.validate(res, binding);
 
 		return res;
 	}
+
+	//	public Item reconstructEdit(final Item item, final BindingResult binding) {
+	//
+	//		final Item res = item;
+	//
+	//		final Provider p = this.providerService.findByPrincipal();
+	//		Assert.isTrue(res.getProvider().equals(p));
+	//		res.setProvider(p);
+	//		this.validator.validate(res, binding);
+	//
+	//		return res;
+	//	}
 	//Other Methods--------------------
 
 	public Collection<Double> statsNumberItemsPerProvider() {
