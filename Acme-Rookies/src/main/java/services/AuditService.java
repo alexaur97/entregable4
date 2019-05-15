@@ -62,20 +62,23 @@ public class AuditService {
 
 		return result;
 	}
+	public boolean isDraft(final Audit audit) {
+		Boolean res = false;
+		if (audit.getId() != 0) {
+			final Audit auditDB = this.findOne(audit.getId());
+			if (auditDB.getMode().equals("DRAFT"))
+				res = true;
+		}
+		return res;
+	}
 
 	public void save(final Audit audit) {
 		Assert.notNull(audit);
-		if (audit.getId() != 0) {
-			final Audit auditDB = this.findOne(audit.getId());
-			Assert.isTrue(auditDB.getMode().equals("DRAFT"));
-		}
 		this.auditRepository.save(audit);
 	}
 
 	public void delete(final Audit audit) {
 		Assert.notNull(audit);
-		final Audit auditDB = this.findOne(audit.getId());
-		Assert.isTrue(auditDB.getMode().equals("DRAFT"));
 		this.auditRepository.delete(audit);
 	}
 
