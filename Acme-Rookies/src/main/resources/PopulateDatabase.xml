@@ -911,7 +911,7 @@
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
 		<property name="name" value="Acme Rookies" />
 		<property name="banner"
-			value="https://i.ibb.co/SPYV8RY/093b7d27759195-5636a49c3a1ba.png" />
+			value="http://i63.tinypic.com/29m6gpf.jpg" />
 		<property name="sysMessage"
 			value="Welcome to Acme Rookies! We're IT rookie's favourite job marketplace!" />
 		<property name="sysMessageEs"
