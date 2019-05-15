@@ -79,14 +79,8 @@ public class ApplicationCompanyController extends AbstractController {
 		try {
 			final Application application = this.applicationService.acceptApplicationChanges(applicationId);
 			this.applicationService.saveCompany(application);
-			final Company company = this.companyService.findByPrincipal();
-			applications = this.applicationService.findApplicationsCompany(company.getId());
-			applicationsPending = this.applicationService.findApplicationsPendingByCompany(company.getId());
-			result = new ModelAndView("application/list");
-			result.addObject("requestURI", "application/company/list.do");
-			result.addObject("applications", applications);
-			result.addObject("applicationsPending", applicationsPending);
-			result.addObject("s", s);
+			result = new ModelAndView("redirect:/application/company/list.do");
+
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/#");
 		}
