@@ -10,8 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import services.AuditorService;
+import services.PositionService;
 import utilities.AbstractTest;
 import domain.Auditor;
+import domain.Position;
 import forms.AuditorRegisterForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,6 +25,9 @@ public class AuditorServiceTest extends AbstractTest {
 
 	@Autowired
 	private AuditorService	auditorService;
+
+	@Autowired
+	private PositionService	positionService;
 
 
 	//Requisito 4.2 Un Administrator debe poder crear un nuevo auditor en el sistema
@@ -83,6 +88,36 @@ public class AuditorServiceTest extends AbstractTest {
 
 		aud = this.auditorService.constructByForm(form);
 		this.auditorService.save(aud);
+		super.unauthenticate();
+	}
+	//Requisito 3.1 Un Actor autenticado como Auditor puede asignarse una posicion.
+
+	@Test
+	public void testSelfAssignPositionGood() {
+		super.authenticate("auditor1");
+		Auditor auditor = this.auditorService.findByPrincipal();
+		final int IdPosition = super.getEntityId("position2");
+		final Position position = this.positionService.findOne(IdPosition);
+		auditor.getPositions().add(position);
+		auditor = this.auditorService.reconstruct(auditor, null);
+
+		this.auditorService.save(auditor);
+		super.unauthenticate();
+	}
+	//	Para el caso negativo estamos intentando que un Auditor se asigne una posicion en modo borrador
+	//Análisis del sentence coverage: el sistema al llamar al metodo del servicio "reconstruct" comprueba
+	// que la position seleccionada cumpla todas las condiciones.
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testSelfAssignPositionError() {
+		super.authenticate("auditor1");
+		Auditor auditor = this.auditorService.findByPrincipal();
+		final int IdPosition = super.getEntityId("position3");
+		final Position position = this.positionService.findOne(IdPosition);
+		auditor.getPositions().add(position);
+		auditor = this.auditorService.reconstruct(auditor, null);
+
+		this.auditorService.save(auditor);
 		super.unauthenticate();
 	}
 }

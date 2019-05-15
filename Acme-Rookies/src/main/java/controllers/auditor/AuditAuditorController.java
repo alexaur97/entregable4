@@ -91,6 +91,7 @@ public class AuditAuditorController extends AbstractController {
 		try {
 			Assert.notNull(audit.getPosition());
 
+			Assert.isTrue(this.auditService.isDraft(audit));
 			audit = this.auditService.reconstruct(audit, binding);
 
 			if (binding.hasErrors())
@@ -117,19 +118,19 @@ public class AuditAuditorController extends AbstractController {
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Audit audit, final BindingResult binding) {
 		ModelAndView result;
-		final Audit au = this.auditService.findOne(audit.getId());
+		final Audit auditDB = this.auditService.findOne(audit.getId());
+
 		try {
 
-			final Audit auditDB = this.auditService.findOne(audit.getId());
 			Assert.notNull(auditDB);
 
 			final Collection<Audit> audits = this.auditService.findByAuditor();
 			Assert.isTrue(audits.contains(auditDB));
-			this.auditService.delete(au);
+			this.auditService.delete(auditDB);
 			result = new ModelAndView("redirect:/audit/auditor/myList.do");
 
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(au, oops.getMessage());
+			result = this.createEditModelAndView(auditDB, oops.getMessage());
 
 			final String msg = oops.getMessage();
 			if (msg.equals("auditcannotDelete")) {

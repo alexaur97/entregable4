@@ -131,6 +131,13 @@ public class AuditorService {
 
 		final Collection<Position> positions = a.getPositions();
 
+		if (!res.getPositions().isEmpty())
+			for (final Position p : res.getPositions()) {
+				Assert.isTrue(p.getCancelled().equals(false));
+				Assert.isTrue(p.getMode().equals("FINAL"));
+				Assert.isTrue(p.getCompany().getBanned().equals(false));
+			}
+
 		res.getPositions().addAll(positions);
 		res.setAddress(a.getAddress());
 		res.setBanned(a.getBanned());
