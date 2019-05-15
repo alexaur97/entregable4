@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
 
 import services.AuditService;
 import utilities.AbstractTest;
@@ -32,10 +31,9 @@ public class AuditServiceTest extends AbstractTest {
 		super.authenticate("auditor1");
 		final int IdAudit = super.getEntityId("audit1");
 		Audit audit = this.auditService.findOne(IdAudit);
-		Assert.isTrue(this.auditService.isDraft(audit));
 		audit.setText("text");
 		audit.setScore(2);
-		audit.setMode("FINAL");
+		audit.setMode("DRAFT");
 
 		audit = this.auditService.reconstruct(audit, null);
 
@@ -46,12 +44,11 @@ public class AuditServiceTest extends AbstractTest {
 	//Análisis del sentence coverage: el sistema al llamar al metodo del servicio "save" comprueba
 	// que la auditoria anteriormente estuviera en modo borrador.
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void testEditAuditError() {
 		super.authenticate("auditor1");
 		final int IdAudit = super.getEntityId("audit2");
 		Audit audit = this.auditService.findOne(IdAudit);
-		Assert.isTrue(this.auditService.isDraft(audit));
 		audit.setText("text");
 		audit.setScore(2);
 		audit.setMode("FINAL");
@@ -84,7 +81,6 @@ public class AuditServiceTest extends AbstractTest {
 		final int IdAudit = super.getEntityId("audit2");
 
 		final Audit audit = this.auditService.findOne(IdAudit);
-		Assert.isTrue(this.auditService.isDraft(audit));
 
 		this.auditService.delete(audit);
 		super.unauthenticate();

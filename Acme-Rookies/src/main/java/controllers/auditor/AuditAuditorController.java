@@ -91,7 +91,6 @@ public class AuditAuditorController extends AbstractController {
 		try {
 			Assert.notNull(audit.getPosition());
 
-			Assert.isTrue(this.auditService.isDraft(audit));
 			audit = this.auditService.reconstruct(audit, binding);
 
 			if (binding.hasErrors())
