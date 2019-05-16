@@ -77,7 +77,7 @@ public class PositionServiceTest extends AbstractTest {
 	public void testEditModePositionGood() {
 		super.authenticate("company1");
 
-		final int IdPosition = super.getEntityId("position3");
+		final int IdPosition = super.getEntityId("position9");
 		Position position = this.positionService.findOne(IdPosition);
 
 		position = this.positionService.saveMode(position);
@@ -93,7 +93,7 @@ public class PositionServiceTest extends AbstractTest {
 	public void testEditModePositionError() {
 		super.authenticate("company1");
 
-		final int IdPosition = super.getEntityId("position2");
+		final int IdPosition = super.getEntityId("position6");
 		Position position = this.positionService.findOne(IdPosition);
 
 		position = this.positionService.saveMode(position);
@@ -106,7 +106,7 @@ public class PositionServiceTest extends AbstractTest {
 	public void testDeletePositionGood() {
 		super.authenticate("company1");
 
-		final int IdPosition = super.getEntityId("position2");
+		final int IdPosition = super.getEntityId("position3");
 		final Position position = this.positionService.findOne(IdPosition);
 
 		this.positionService.delete(position);
@@ -149,7 +149,7 @@ public class PositionServiceTest extends AbstractTest {
 	public void testCancelPositionError() {
 		super.authenticate("company1");
 
-		final int IdPosition = super.getEntityId("position2");
+		final int IdPosition = super.getEntityId("position3");
 		final Position position = this.positionService.findOne(IdPosition);
 
 		this.positionService.cancel(position);
@@ -161,7 +161,7 @@ public class PositionServiceTest extends AbstractTest {
 	@Test
 	public void testEditPositionGood() {
 		super.authenticate("company1");
-		final int IdPosition = super.getEntityId("position2");
+		final int IdPosition = super.getEntityId("position3");
 		Position position = this.positionService.findOne(IdPosition);
 		position.setDescription("nueva descripcion");
 		position = this.positionService.reconstruct(position, null);
@@ -177,7 +177,7 @@ public class PositionServiceTest extends AbstractTest {
 	public void testEditPositionError() {
 		super.authenticate("company1");
 
-		final int IdPosition = super.getEntityId("position1");
+		final int IdPosition = super.getEntityId("position2");
 		Position position = this.positionService.findOne(IdPosition);
 
 		position.setDescription("nueva descripcion");

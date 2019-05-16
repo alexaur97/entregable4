@@ -4,6 +4,7 @@ package service;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -54,14 +55,23 @@ public class MessageServiceTest extends AbstractTest {
 		final Message msg = this.messageService.create();
 		msg.setSubject("Test subject");
 		msg.setBody("Test body");
+		//nuevo
 		final ArrayList<String> tags = new ArrayList<>();
 		tags.add("tag1");
 		tags.add("tag2");
 		msg.setTags(tags);
 		msg.setRecipient(recipient);
-
-		final Message message = this.messageService.reconstruct(msg, null);
-		this.messageService.save(message);
+		final Actor a = this.actorService.findByPrincipal();
+		msg.setSender(a);
+		msg.setOwner(a);
+		final Date moment = new Date();
+		msg.setMoment(moment);
+		msg.setSpam(false);
+		msg.setDeleted(false);
+		msg.setCopy(false);
+		tags.add("important");
+		msg.setTags(tags);
+		this.messageService.save(msg);
 		super.unauthenticate();
 	}
 
@@ -90,8 +100,17 @@ public class MessageServiceTest extends AbstractTest {
 		tags.add("tag2");
 		msg.setTags(tags);
 		msg.setRecipient(recipient);
-		final Message message = this.messageService.reconstruct(msg, null);
-		this.messageService.save(message);
+		final Actor a = this.actorService.findByPrincipal();
+		msg.setSender(a);
+		msg.setOwner(a);
+		final Date moment = new Date();
+		msg.setMoment(moment);
+		msg.setSpam(false);
+		msg.setDeleted(false);
+		msg.setCopy(false);
+		tags.add("important");
+		msg.setTags(tags);
+		this.messageService.save(msg);
 		super.unauthenticate();
 	}
 

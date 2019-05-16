@@ -1162,6 +1162,26 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="position9" class="domain.Position">
+		<property name="title" value="New Position" />
+		<property name="description" value="No description available" />
+		<property name="deadline" value="27/09/2025 11:11" />
+		<property name="profileRequired" value="No Spammer" />
+		<property name="skillRequired" value="You mus be really good with spam" />
+		<property name="techRequired" value="-" />
+		<property name="salaryOffered" value="2500" />
+		<property name="ticker" value="NEWP-8965" />
+		<property name="mode" value="DRAFT" />
+		<property name="cancelled" value="false" />
+		<property name="company" ref="actor8" />
+		<property name="problems">
+			<list>
+				<ref bean="problem7" />
+				<ref bean="problem8" />
+			</list>
+		</property>
+	</bean>
 
 	<!-- Problems -->
 

@@ -287,6 +287,8 @@ public class PositionService {
 
 	public Position saveMode(final Position position) {
 		Assert.isTrue(position.getProblems().size() > 1);
+		Assert.isTrue(!position.getMode().equals("FINAL"));
+
 		final Position res = position;
 		res.setMode("FINAL");
 		return res;
@@ -351,7 +353,6 @@ public class PositionService {
 	public Double avgSalaryHighestPositions() {
 		final Double result = this.positionRepository.avgSalaryHighestPositions();
 		return result;
-
 
 	}
 

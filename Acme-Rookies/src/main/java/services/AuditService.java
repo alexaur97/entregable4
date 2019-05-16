@@ -67,6 +67,7 @@ public class AuditService {
 		Assert.notNull(audit);
 		if (audit.getId() != 0) {
 			final Audit auditDB = this.findOne(audit.getId());
+			System.out.println(auditDB.getMode());
 			Assert.isTrue(auditDB.getMode().equals("DRAFT"));
 		}
 		this.auditRepository.save(audit);
@@ -93,6 +94,7 @@ public class AuditService {
 		res.setMoment(date);
 
 		this.validator.validate(res, binding);
+		System.out.println(binding);
 		return res;
 	}
 
