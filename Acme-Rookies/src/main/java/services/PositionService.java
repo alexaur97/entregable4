@@ -352,7 +352,6 @@ public class PositionService {
 		final Double result = this.positionRepository.avgSalaryHighestPositions();
 		return result;
 
-
 	}
 
 	public Collection<Position> findPositionsRequisitos() {
