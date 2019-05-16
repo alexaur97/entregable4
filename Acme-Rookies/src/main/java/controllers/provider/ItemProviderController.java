@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
+import security.LoginService;
 import services.ActorService;
 import services.ItemService;
 import services.ProviderService;
@@ -34,6 +36,9 @@ public class ItemProviderController extends AbstractController {
 
 	@Autowired
 	ActorService	actorService;
+
+	@Autowired
+	LoginService	loginService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -142,13 +147,14 @@ public class ItemProviderController extends AbstractController {
 		ModelAndView result;
 		try {
 			Assert.notNull(itemId);
-			final Provider p = this.providerService.findByPrincipal();
-			//			final Company company = this.companyService.findByPrincipal();
+			Boolean misItems = false;
+
 			final Item item = this.itemService.findOne(itemId);
-			Assert.notNull(item);
-			final Boolean misItems = item.getProvider().equals(p);
-			// Assert.isTrue(misItems);
-			//			Assert.isTrue(problem.getCompany().equals(company));
+			if (this.loginService.notLogged())
+				if (LoginService.getPrincipal().getAuthorities().contains(Authority.PROVIDER)) {
+					final Provider p = this.providerService.findByPrincipal();
+					misItems = item.getProvider().equals(p);
+				}
 			result = new ModelAndView("item/show");
 			result.addObject("item", item);
 			result.addObject("misItems", misItems);
@@ -157,7 +163,6 @@ public class ItemProviderController extends AbstractController {
 		}
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndView(final Item item) {
 		return this.createEditModelAndView(item, null);
 	}

@@ -77,4 +77,26 @@ public class LoginService implements UserDetailsService {
 		return result;
 	}
 
+	public boolean notLogged() {
+		Boolean result = false;
+		final UserAccount u;
+		SecurityContext context;
+		Authentication authentication;
+		final Object principal;
+		context = SecurityContextHolder.getContext();
+		if (context != null) {
+			authentication = context.getAuthentication();
+			if (authentication != null) {
+				principal = authentication.getPrincipal();
+				if (principal instanceof UserAccount) {
+					u = (UserAccount) principal;
+					if (u != null && u.getId() != 0)
+						result = true;
+				}
+			}
+
+		}
+		return result;
+	}
+
 }
