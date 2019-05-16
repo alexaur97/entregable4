@@ -38,6 +38,7 @@
 						<form:select  id="positions" code="auditor.positions" path="positions">
 							<form:options items="${position}" itemLabel="title" itemValue="id" />
 						</form:select>
+						<spring:message code= "auditor.position.expl"/>
 						
 						<br>
 						<br>
